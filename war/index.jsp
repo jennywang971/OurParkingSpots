@@ -15,10 +15,10 @@
 <!DOCTYPE html>
 <html>
 	<head>
-    	<link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+    	<link type="text/css" rel="stylesheet" href="/cs/main.css" />
     	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=&amp;sensor=true"> </script>  	
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>
-        <script type="text/javascript" src="parking_map.js"> </script>
+        <script type="text/javascript" src="/js/parking_map.js"> </script>
   	</head>
     <body>
 
