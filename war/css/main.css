@@ -49,24 +49,3 @@ div#map-canvas {
 	bottom: 0px;
 	position: absolute;
 }
-
-.form-inline>.row input {
-	vertical-align: top;
-}
-
-.form-inline .form-group {
-	padding-left: 2px;
-	padding-right: 2px;
-}
-
-input[type="text"].form-control {
- 	padding-top: 20px;
-	padding-bottom: 20px;
-}
-
-input[type="submit"].form-control {
-	padding-left: 25px;
-	padding-right: 25px;
-	padding-top: 10px;
-	padding-bottom: 30px;
-}
