@@ -4,19 +4,19 @@
 <head>
 <link rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
-<link rel="stylesheet" href="css/datepicker3.css" />
-<link rel="stylesheet" href="css/main1.css" />
-<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Quintessential' >
+<link rel="stylesheet" href="/css/datepicker3.css" />
+<link rel='stylesheet'
+	href='//fonts.googleapis.com/css?family=Quintessential'>
+<link rel="stylesheet" href="/css/main1.css" />
 <script
-	src="//maps.googleapis.com/maps/api/js?v=3&amp;key=&amp;sensor=true"></script>
-<script
-	src="//maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>
+	src="//maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
 <script
 	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script
 	src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-<script src="js/bootstrap-datepicker.js"></script>
-<script src="js/abc.js"></script>
+<script src="/js/jquery.geocomplete.min.js"></script>
+<script src="/js/bootstrap-datepicker.js"></script>
+<script src="/js/abc.js"></script>
 </head>
 
 <body>
@@ -40,12 +40,14 @@
 			<div class="row">
 				<div class="col-md-10">
 					<h1 class="text-special">Find a place to park.</h1>
-					<h2>Grandpas needn't worry about parking in downtown Vancouver for his vintage car.</h2>
-					<form class="form-inline" action="/search" method="post" role="form">
+					<h2>Grandpas needn't worry about parking in downtown Vancouver
+						for his vintage car.</h2>
+					<form class="form-inline" action="/search" method="post"
+						role="form">
 						<div class="row">
 							<div class="form-group col-md-6">
-								<input type="text" class="form-control" autocomplete="off"
-									id="location" name="location"
+								<input type="text" class="form-control" id="location"
+									autocomplete="off" name="location"
 									placeholder="Where do you want to park?" />
 							</div>
 
