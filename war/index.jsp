@@ -47,8 +47,9 @@
 
 		<form action="/search" method="post">
 			<div>
-				<textarea name="content" rows="1" cols="10" placeholder="city"
+				<textarea name="city" rows="1" cols="10" placeholder="city"
 					style="resize: none"></textarea>
+				<input type="hidden" id="hard_coded_city" name="hard_coded_city" value="Toronto, ON" />
 				<input type="text" name="date" placeholder="date"> <input
 					type="submit" value="Search" />
 			</div>
