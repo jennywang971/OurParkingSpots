@@ -40,8 +40,8 @@
 			<div class="row">
 				<div class="col-md-10">
 					<h1 class="text-special">Find a place to park.</h1>
-					<h2>Grandpas needn't worry about parking in downtown Vancouver
-						for his vintage car.</h2>
+					<h2>Grandpas needn't worry about finding a parking spot for
+						his vintage car.</h2>
 					<form class="form-inline" action="/search" method="post"
 						role="form">
 						<div class="row">
