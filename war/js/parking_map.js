@@ -6,6 +6,7 @@ var mapOptions = {
 };
 var map;
 var markers = [];
+var geocoder;
 
 function initialize() {
  
@@ -13,19 +14,38 @@ function initialize() {
         mapOptions);
     
     setAllMap(map);
+    //geocoder = new google.maps.Geocoder();
+//    codeAddress();
+   
     
     // use HTML5 geolocation
-    if(navigator.geolocation){
-  	
-  	// specify the geolocation success and error callback functions
-  	// HTML5: navigator.geolocation.getCurrentPosition(success, error, options)
-    	navigator.geolocation.getCurrentPosition(showPosition, handleNoGeolocation(true));
-    }
-    else{
-  	  handleNoGeolocation(false);
-    }
+//    if(navigator.geolocation){
+//  	
+//  	// specify the geolocation success and error callback functions
+//  	// HTML5: navigator.geolocation.getCurrentPosition(success, error, options)
+//    	navigator.geolocation.getCurrentPosition(showPosition, handleNoGeolocation(true));
+//    }
+//    else{
+//  	  handleNoGeolocation(false);
+//    }
 }
 
+// get map to display around the specified address
+function codeAddress(sAddress){
+	geocoder = new google.maps.Geocoder();
+	//var sAddress = "Ottawa, ON";
+	geocoder.geocode( { 'address': sAddress}, function(results, status) { 
+		if(status == google.maps.GeocoderStatus.OK){
+			map.setCenter(results[0].geometry.location);
+			var marker = new google.maps.Marker({  
+				map: map,  
+				position: results[0].geometry.location }); 
+		}
+		else{
+			alert("Geocode was not successful for the following reason: " + status); 
+		}
+	}); 
+}
   // show position when geolocation is supported and succeeded
   function showPosition(position){
 	  var map_position = new google.maps.LatLng(position.coords.latitude,

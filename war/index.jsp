@@ -1,142 +1,132 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.List" %>
-<%@ page import="com.google.appengine.api.users.User" %>
-<%@ page import="com.google.appengine.api.users.UserService" %>
-<%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
-<%@ page import="com.google.appengine.api.datastore.DatastoreServiceFactory" %>
-<%@ page import="com.google.appengine.api.datastore.DatastoreService" %>
-<%@ page import="com.google.appengine.api.datastore.Query" %>
-<%@ page import="com.google.appengine.api.datastore.Entity" %>
-<%@ page import="com.google.appengine.api.datastore.FetchOptions" %>
-<%@ page import="com.google.appengine.api.datastore.Key" %>
-<%@ page import="com.google.appengine.api.datastore.KeyFactory" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
-	<head>
-    	<link type="text/css" rel="stylesheet" href="/css/main.css" />
-    	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=&amp;sensor=true"> </script>  	
-        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>
-        <script type="text/javascript" src="/js/parking_map.js"> </script>
-  	</head>
-    <body>
+<head>
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/datepicker3.css" />
+<link rel='stylesheet'
+	href='//fonts.googleapis.com/css?family=Quintessential'>
+<link rel="stylesheet" href="/css/main1.css" />
+<script
+	src="//maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
+<script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script
+	src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="/js/jquery.geocomplete.min.js"></script>
+<script src="/js/bootstrap-datepicker.js"></script>
+<script src="/js/abc.js"></script>
+<script type="text/javascript" src="/js/parking_map.js"> </script>
+</head>
 
-<%
-    UserService userService = UserServiceFactory.getUserService();
-    User user = userService.getCurrentUser();
-%>
-	<div class="greeting">
-		<%    
+<body>
 
-    if (user != null) {
-        pageContext.setAttribute("user", user);
-%>
-		Hello, ${fn:escapeXml(user.nickname)}! (You can <a
-			href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign
-			out</a>.)
-		<%
-    } else {
-%>
-		Hello! <a
-			href="<%= userService.createLoginURL(request.getRequestURI()) %>">Sign
-			in</a> to post or reserve a spot.
-		<%
-    }
-%>
 
-		<form action="/search" method="post">
-			<div>
-				<textarea name="city" rows="1" cols="10" placeholder="city"
-					style="resize: none"></textarea>
-				<input type="hidden" id="hard_coded_city" name="hard_coded_city" value="Toronto, ON" />
-				<input type="text" name="date" placeholder="date"> <input
-					type="submit" value="Search" />
+	<div class="navbar navbar-inverse navbar-static-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">MyParkingSpots</a>
 			</div>
-		</form>
-
-	</div>
-	<div class="guestbook">
-		<div id="guestbook_header">
-			<%
-				DatastoreService datastore = DatastoreServiceFactory
-						.getDatastoreService();
-				Key parkingSpotsKey = KeyFactory.createKey("ParkingSpots",
-						"allParkingSpots");
-
-				// Get parking spots from the system
-				Query query = new Query("ParkingSpot", parkingSpotsKey).addSort(
-						"date", Query.SortDirection.DESCENDING);
-				List<Entity> parkingSpots = datastore.prepare(query).asList(
-						FetchOptions.Builder.withLimit(10));
-				if (parkingSpots.isEmpty()) {
-			%>
-			<p>There is no parking spots available nearby.</p>
-			<%
-    } else {
-%>
-			<p>Available parking spots.</p>
-			<%
-    }
-%>
-
-			<form action="/post_parking_spot" method="post">
-				<div>
-					<textarea name="content" rows="5" cols="60" style="resize: none"></textarea>
-				</div>
-				<div>
-					<input type="submit" value="Post Parking Spot" />
-				</div>
-				<input type="hidden" id="latitude" name="latitude" value="0" /> <input
-					type="hidden" id="longitude" name="longitude" value="0" /> <input
-					type="hidden" id="accuracy" name="accuracy" value="0" />
-			</form>
-		</div>
-		<div id="guestbook_body">
-			<%
-            
-    if (!parkingSpots.isEmpty()) {
-
-        for (Entity parkingSpot : parkingSpots) {
-            pageContext.setAttribute("greeting_content", parkingSpot.getProperty("description"));               
-            pageContext.setAttribute("greeting_latitude", (parkingSpot.getProperty("latitude")==null? "0": parkingSpot.getProperty("latitude")));
-        	pageContext.setAttribute("greeting_longitude", (parkingSpot.getProperty("longitude")==null? "0": parkingSpot.getProperty("longitude")));
-        	pageContext.setAttribute("greeting_accuracy", (parkingSpot.getProperty("accuracy")==null? "0": parkingSpot.getProperty("accuracy")));
-            String name;           
-
-        	if (parkingSpot.getProperty("owner") == null) {
-                name = "Anonymous";
-%>
-			<p>An anonymous person posted a parking spot:</p>
-			<%
-            } else {
-                pageContext.setAttribute("greeting_user", parkingSpot.getProperty("owner"));
-                name = pageContext.getAttribute("greeting_user").toString();
-%>
-
-			<p>
-				<b>${fn:escapeXml(greeting_user.nickname)}</b> posted a parking
-				spot:
-			</p>
-			<%
-            }
-%>
-			<blockquote>${fn:escapeXml(greeting_content)}</blockquote>
-			<p>(Location: ${fn:escapeXml(greeting_latitude)},
-				${fn:escapeXml(greeting_longitude)}. Accuracy:
-				${fn:escapeXml(greeting_accuracy)} meters)</p>
-
-			<script type="text/javascript"> 
-                var userName = "<%=name%>";
-                
-                addMarker(new google.maps.LatLng(${fn:escapeXml(greeting_latitude)}, ${fn:escapeXml(greeting_longitude)}), userName); </script>
-			<%
-        }
-    }
-%>
-
+			<div class="navbar-collapse collapse">
+				<form class="navbar-form navbar-right" role="form">
+					<button type="submit" class="btn btn-success">Sign in</button>
+				</form>
+			</div>
 		</div>
 	</div>
-	<div id="map-canvas"> </div>
-  </body>
-</html>
+
+	<div id="search-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-10">
+					<h1 class="text-special">Find a place to park.</h1>
+					<h2>Grandpas needn't worry about parking in downtown Vancouver
+						for his vintage car.</h2>
+					<!-- <form class="form-inline" action="/search" method="post"
+						role="form"> -->
+						<form class="form-inline" action="search_result.jsp" method="get"
+						role="form">
+						<div class="row">
+							<div class="form-group col-md-6">
+								<input type="text" class="form-control" id="location"
+									autocomplete="off" name="location"
+									placeholder="Where do you want to park?" />
+							</div>
+
+							<div class="form-group date col-md-2">
+								<div class="input-group date">
+									<input type="text" class="form-control" autocomplete="off"
+										id="startdatepicker" name="startdatepicker"
+										placeholder="Start Date" /> <span class="input-group-addon"><span
+										class="glyphicon glyphicon-calendar"></span></span>
+								</div>
+							</div>
+
+
+							<div class="form-group date col-md-2">
+								<div class="input-group date">
+									<input type="text" class="form-control" autocomplete="off"
+										id="enddatepicker" name="enddatepicker" placeholder="End Date" />
+									<span class="input-group-addon"><span
+										class="glyphicon glyphicon-calendar"></span></span>
+								</div>
+							</div>
+
+							<div class="form-group col-md-2">
+								<input type="submit"
+									class="form-control btn btn-primary btn-large"
+									id="submit_location" value="Search" />
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<!-- Example row of columns -->
+		<div class="row">
+			<div class="col-md-4">
+				<h2>Renter's Guide</h2>
+				<p>Donec id elit non mi porta gravida at eget metus. Fusce
+					dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
+					ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
+					magna mollis euismod. Donec sed odio dui.</p>
+				<p>
+					<a class="btn btn-default" href="#" role="button">View details
+						&raquo;</a>
+				</p>
+			</div>
+			<div class="col-md-4">
+				<h2>Owner's Guide</h2>
+				<p>Donec id elit non mi porta gravida at eget metus. Fusce
+					dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
+					ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
+					magna mollis euismod. Donec sed odio dui.</p>
+				<p>
+					<a class="btn btn-default" href="#" role="button">View details
+						&raquo;</a>
+				</p>
+			</div>
+			<div class="col-md-4">
+				<h2>About Insurance</h2>
+				<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in,
+					egestas eget quam. Vestibulum id ligula porta felis euismod semper.
+					Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum
+					nibh, ut fermentum massa justo sit amet risus.</p>
+				<p>
+					<a class="btn btn-default" href="#" role="button">View details
+						&raquo;</a>
+				</p>
+			</div>
+		</div>
+
+		<hr>
+
+		<footer>
+			<p>&copy; MyParkingSpots.Inc 2014</p>
+		</footer>
+	</div>
+</body>

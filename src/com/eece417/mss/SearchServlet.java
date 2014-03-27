@@ -13,6 +13,8 @@ public class SearchServlet extends HttpServlet {
               throws IOException {
 		  // TODO: not done yet
 		  
-		  String cityName = req.getParameter("hard_coded_city");
+		  String cityName = req.getParameter("location");
+		  
+		  resp.sendRedirect("/index.jsp");
 	  }
 }

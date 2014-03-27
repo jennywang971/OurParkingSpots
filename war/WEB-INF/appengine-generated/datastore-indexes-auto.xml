@@ -1,9 +1,9 @@
-<!-- Indices written at Sun, 23 Mar 2014 17:33:55 PDT -->
+<!-- Indices written at Thu, 27 Mar 2014 13:55:18 PDT -->
 
 <datastore-indexes>
 
     <!-- Used 1 time in query history -->
-    <datastore-index kind="Greeting" ancestor="true" source="auto">
+    <datastore-index kind="ParkingSpot" ancestor="true" source="auto">
         <property name="date" direction="desc"/>
     </datastore-index>
 
