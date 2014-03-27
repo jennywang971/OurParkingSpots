@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 public class SearchServlet extends HttpServlet {
 	  public void doPost(HttpServletRequest req, HttpServletResponse resp)
               throws IOException {
-		  // TODO: implement!
+		  // TODO: not done yet
+		  
+		  String cityName = req.getParameter("location");
+		  
+		  resp.sendRedirect("/index.jsp");
 	  }
 }
