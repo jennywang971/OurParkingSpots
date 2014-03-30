@@ -2,7 +2,7 @@
 
 google.maps.visualRefresh = true;
 var mapOptions = {
-		zoom: 8
+	zoom : 14
 };
 var map;
 var markers = [];

@@ -43,8 +43,7 @@
 					<h1 class="text-special">Find a place to park.</h1>
 					<h2>Grandpas needn't worry about parking in downtown Vancouver
 						for his vintage car.</h2>
-					<!-- <form class="form-inline" action="/search" method="post"
-						role="form"> -->
+			
 						<form class="form-inline" action="search_result.jsp" method="get"
 						role="form">
 						<div class="row">

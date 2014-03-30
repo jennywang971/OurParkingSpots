@@ -1,0 +1,10 @@
+<!-- Indices written at Sat, 29 Mar 2014 22:01:21 PDT -->
+
+<datastore-indexes>
+
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="ParkingSpot" ancestor="true" source="auto">
+        <property name="date" direction="desc"/>
+    </datastore-index>
+
+</datastore-indexes>
