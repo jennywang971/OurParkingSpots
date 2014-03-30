@@ -36,3 +36,6 @@ datastore-indexes-auto.xml
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+war/WEB-INF/appengine-generated
+lib/*
