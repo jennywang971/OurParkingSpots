@@ -25,6 +25,7 @@
 *.log
 *.sql
 *.sqlite
+datastore-indexes-auto.xml
 
 # OS generated files #
 ######################
