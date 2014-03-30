@@ -17,7 +17,7 @@
 	<head>
     	<link type="text/css" rel="stylesheet" href="/css/main.css" />
     	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=&amp;sensor=true"> </script>  	
-        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>
+       <!--  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script> -->
         <script type="text/javascript" src="/js/parking_map.js"> </script>
   	</head>
     <body>
