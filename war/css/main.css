@@ -30,7 +30,7 @@ div#guestbook_body {
 	margin-bottom: 80px;
 }
 
-div.guestbook {
+div.left {
 	float: left;
 	padding: 0.5em;
 	width: 39%;
@@ -39,11 +39,11 @@ div.guestbook {
 }
 
 div#map-canvas {
-	margin-top: 60px;
-	height: calc(100% - 60px);
-	height: -o-calc(100% - 60px); /* opera */
-	height: -webkit-calc(100% - 60px); /* google, safari */
-	height: -moz-calc(100% - 60px); /* firefox */
+	margin-top: 50px;
+	height: calc(100% - 50px);
+	height: -o-calc(100% - 50px); /* opera */
+	height: -webkit-calc(100% - 50px); /* google, safari */
+	height: -moz-calc(100% - 50px); /* firefox */
 	width: 60%;
 	right: 0px;
 	bottom: 0px;
