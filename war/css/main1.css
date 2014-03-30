@@ -55,3 +55,10 @@ input[type="submit"].form-control {
 .navbar {
 	margin-bottom: 0px;
 }
+
+.post-parking-date-picker { 
+    width: 47%;
+    padding-left: 20px;
+    padding-top: 20px;
+    display: inline-block
+}

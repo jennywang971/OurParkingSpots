@@ -56,7 +56,7 @@
 </p>
 
 	</div>
-	<div class="guestbook">
+	<div class="left">
 		<div id="guestbook_header">
 			<%
 				
