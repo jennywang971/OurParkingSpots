@@ -32,6 +32,18 @@
 			</div>
 		</div>
 	</div>
+	
+    PAYMENT OPTION	
+	<div class="row">
+		<button type="button" class="btn btn-default dropdown-toggle"
+			data-toggle="dropdown">
+			Dropdown <span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu">
+			<li><a href="#">Dropdown link</a></li>
+			<li><a href="#">Dropdown link</a></li>
+		</ul>
+	</div>
 
 	<form action="/post_parking_spot" method="post">
           <div><textarea name="content" rows="5" cols="75" style="resize:none"></textarea></div>
