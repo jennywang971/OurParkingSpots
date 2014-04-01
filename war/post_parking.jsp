@@ -1,58 +1,87 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<%@ include file="header1.jsp" %> 
+<%@ include file="header1.jsp"%>
 <%-- <jsp:include page="/header1.jsp">
     <jsp:param name="post_parking" value="true"/>
 </jsp:include> --%>
- <script src="js/post_parking.js"> </script>
- <script src="js/abc.js"> </script>
+<script src="js/post_parking.js"> </script>
+<script src="js/abc.js"> </script>
 
-    <div class="left">
+<div class="left">
 
-	POST A SPOT!!
+	<label for="latitude"> POST A SPOT!! <br /> Click on the map
+		to specify a location
+	</label>
 
-    <div class="row">
-		<div class="form-group date post-parking-date-picker">
-			<div class="input-group date">
-				<input type="text" class="form-control" autocomplete="off"
-					id="startdatepicker" name="startdatepicker"
-					placeholder="Start Date" /> <span class="input-group-addon"><span
-					class="glyphicon glyphicon-calendar"></span></span>
+	<form action="/post_parking_spot" method="post" role="form">
+
+		<div class="row">
+			<div class="input-group post-parking">
+				<span class="input-group-addon">
+				    <span class="glyphicon glyphicon-map-marker"></span>
+				</span> 
+				<input id="latitude" name="latitude" type="text" class="form-control col-xs-3" placeholder="Latitude">
+				<input id="longitude" name="longitude" type="text" class="form-control col-xs-3" placeholder="Longitude">
 			</div>
 		</div>
 
-		<div class="form-group date post-parking-date-picker">
-			<div class="input-group date">
-				<input type="text" class="form-control" autocomplete="off"
-					id="enddatepicker" name="enddatepicker" placeholder="End Date" />
-				<span class="input-group-addon"><span
-					class="glyphicon glyphicon-calendar"></span></span>
+		<label for="startdatepicker">AVAILABLE TIME</label>
+
+		<div class="row">
+			<div class="form-group date post-parking-date-picker">
+				<div class="input-group date post-parking">
+					<input type="text" class="form-control" autocomplete="off"
+						id="startdatepicker" name="startdatepicker"
+						placeholder="Start Date" /> 
+						<span class="input-group-addon">
+					       <span class="glyphicon glyphicon-calendar"></span>
+					    </span>
+				</div>
+			</div>
+
+			<div class="form-group date post-parking-date-picker">
+				<div class="input-group date post-parking">
+					<input type="text" class="form-control" autocomplete="off"
+						id="enddatepicker" name="enddatepicker" placeholder="End Date" />
+					<span class="input-group-addon"><span
+						class="glyphicon glyphicon-calendar"></span></span>
+				</div>
 			</div>
 		</div>
-	</div>
-	
-    PAYMENT OPTION	
-	<div class="row">
-		<button type="button" class="btn btn-default dropdown-toggle"
-			data-toggle="dropdown">
-			Dropdown <span class="caret"></span>
-		</button>
-		<ul class="dropdown-menu">
-			<li><a href="#">Dropdown link</a></li>
-			<li><a href="#">Dropdown link</a></li>
-		</ul>
-	</div>
 
-	<form action="/post_parking_spot" method="post">
-          <div><textarea name="content" rows="5" cols="75" style="resize:none"></textarea></div>
-          <div><input type="submit" value="Post Parking Spot" /></div>
-          <input type="hidden" id="latitude" name="latitude" value="0"/>
-          <input type="hidden" id="longitude" name="longitude" value="0"/>
-          <input type="hidden" id="accuracy" name="accuracy" value="0"/>
-        </form>
-    </div>
-    <div id="map-canvas"> </div>
-  </body>
+		<label for="startdatepicker">RENTAL OPITON</label>
+		<div class="row">
+			<div class="input-group post-parking">
+				<div class="input-group-btn">
+					<button type="button" class="btn btn-default dropdown-toggle"
+						data-toggle="dropdown" style="padding: 10px 12px;">
+						Rate Option <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li class="disabled"><a href="#">Hourly</a></li>
+						<li><a href="#">Daily</a></li>
+						<li class="disabled"><a href="#">Weekly</a></li>
+						<li class="disabled"><a href="#">Monthly</a></li>
+					</ul>
+				</div>
+				<!-- /btn-group -->
+				<span class="input-group-addon">$</span>
+				<input type="text" step="any" min="0" class="form-control"> 
+			</div>
+		</div>
+
+		<label for="content">DESCRIPTION</label>
+		<div class="row input-group post-parking">
+			<textarea class="form-control" name="content" rows="5" cols="100"
+				style="resize: none"></textarea>
+				</div>
+	   <div class="row input-group post-parking" style="float: right;">
+			<button class="btn btn-default" type="submit" >Post Parking Spot</button>
+		</div>
+	</form>
+</div>
+<div id="map-canvas"></div>
+</body>
 </html>

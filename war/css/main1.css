@@ -28,11 +28,11 @@ h2 {
 input[type="text"].form-control {
  	padding-top: 20px;
 	padding-bottom: 20px;
-	width: 100%
+	width: 100%;
 }
 
 input.form-control {
-	width: 100%
+	width: 100%;
 }
 
 input[type="submit"].form-control {
@@ -56,9 +56,17 @@ input[type="submit"].form-control {
 	margin-bottom: 0px;
 }
 
+.post-parking {
+    padding-bottom: 20px;
+    margin: 5px;
+}
+
+.input-group-btn > .btn {
+	min-width: 0px;
+	width: 100%;
+}
+
 .post-parking-date-picker { 
-    width: 48.5%;
-    padding-left: 15px;
-    padding-top: 20px;
+    width: 49.4%;
     display: inline-block
 }
