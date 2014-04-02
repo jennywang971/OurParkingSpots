@@ -34,7 +34,10 @@ function initialize() {
 			marker.setMap(null);
 			marker = null;
 		}
+		
 		marker = createMarker(event.latLng, "name", "<b>Location</b><br>"+event.latLng);
+		$('#latitude').val(event.latLng.lat());
+		$('#longitude').val(event.latLng.lng());
 	});
 
 //	use HTML5 geolocation
@@ -48,6 +51,13 @@ function initialize() {
 	else{
 		handleNoGeolocation(false);
 	}
+	
+	$(".dropdown-menu li a").click(function(){
+		if ($(this).text() == "Daily") {
+			$(this).parents(".input-group-btn").find('.btn').text($(this).text());
+			$(this).parents(".input-group-btn").find('.btn').val($(this).text());
+		}
+	});
 }
 
 //show position when geolocation is supported and succeeded
@@ -104,9 +114,10 @@ function createMarker(latlng, name, html) {
 
 	google.maps.event.addListener(marker, 'click', function() {
 		infowindow.setContent(contentString); 
-		infowindow.open(map,marker);
+		infowindow.open(map, marker);
 	});
 	google.maps.event.trigger(marker, 'click');    
+	
 	return marker;
 }
 

@@ -40,11 +40,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Quintessential'>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
         <link rel="stylesheet" href="/css/datepicker3.css" />
         <link rel="stylesheet" href="/css/main.css" />
         <link rel="stylesheet" href="/css/main1.css" />
-        <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Quintessential'>
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
         <script src="//maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>

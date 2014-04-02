@@ -1,4 +1,6 @@
 
+<%@ page language="java" contentType="text/html; charset=US-ASCII"
+    pageEncoding="US-ASCII"%>
 
 <!DOCTYPE html>
 <html>
@@ -23,19 +25,7 @@
 
 <body>
 
-
-	<div class="navbar navbar-inverse navbar-static-top" role="navigation">
-		<div class="container">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">MyParkingSpots</a>
-			</div>
-			<div class="navbar-collapse collapse">
-				<form class="navbar-form navbar-right" role="form">
-					<button type="submit" class="btn btn-success">Sign in</button>
-				</form>
-			</div>
-		</div>
-	</div>
+	<%@ include file="header_no_login.jsp" %>
 
 	<div id="search-area">
 		<div class="container">
@@ -123,10 +113,6 @@
 			</div>
 		</div>
 
-		<hr>
-
-		<footer>
-			<p>&copy; MyParkingSpots.Inc 2014</p>
-		</footer>
+		<%@ include file="footer.jsp" %>
 	</div>
 </body>
