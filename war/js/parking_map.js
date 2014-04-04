@@ -33,7 +33,7 @@ function initialize() {
 //get map to display around the specified address
 function codeAddress(sAddress){
 	geocoder = new google.maps.Geocoder();
-	//var sAddress = "Ottawa, ON";
+	
 	geocoder.geocode( { 'address': sAddress}, function(results, status) { 
 		if(status == google.maps.GeocoderStatus.OK){
 			map.setCenter(results[0].geometry.location);
@@ -102,9 +102,18 @@ function addMarker(coord, title){
 	});
 	//marker.setMap(map);
 	//alert(title+latitude+longitude);
+	
 	markers.push(marker);
 }
 
+function addInfoWindow(){
+	// alert("adding infor window");
+//	var spotInfo = " Parking spot info ";
+//	var spotInfoWindow = new google.maps.InfoWindow({
+//        content: spotInfo,
+//        map: map
+//    }); 
+}
 function setAllMap(map) {
 	for (var i = 0; i < markers.length; i++) {
 		markers[i].setMap(map);

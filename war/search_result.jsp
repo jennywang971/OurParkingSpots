@@ -81,17 +81,7 @@
     }
 %>
 
-			<form action="/post_parking_spot" method="post">
-				<div>
-					<textarea name="content" rows="5" cols="60" style="resize: none"></textarea>
-				</div>
-				<div>
-					<input type="submit" value="Post Parking Spot" />
-				</div>
-				<input type="hidden" id="latitude" name="latitude" value="0" /> <input
-					type="hidden" id="longitude" name="longitude" value="0" /> <input
-					type="hidden" id="accuracy" name="accuracy" value="0" />
-			</form>
+			
 		</div>
 		<div id="guestbook_body">
 			<%
@@ -124,15 +114,16 @@
 %>
 			<blockquote>${fn:escapeXml(greeting_content)}</blockquote>
 			<p>(Location: ${fn:escapeXml(greeting_latitude)},
-				${fn:escapeXml(greeting_longitude)}. Accuracy:
-				${fn:escapeXml(greeting_accuracy)} meters)</p>
+				${fn:escapeXml(greeting_longitude)}. )</p>
 
 			<script type="text/javascript"> 
                 var userName = "<%=name%>";
                 var sAddress = "${fn:escapeXml(search_location)}";
           
                 codeAddress(sAddress);
-                addMarker(new google.maps.LatLng(${fn:escapeXml(greeting_latitude)}, ${fn:escapeXml(greeting_longitude)}), userName); </script>
+                addMarker(new google.maps.LatLng(${fn:escapeXml(greeting_latitude)}, ${fn:escapeXml(greeting_longitude)}), userName); 
+                addInfoWindow(); 
+                </script>
 			<%
         }
     }
