@@ -57,12 +57,14 @@ public class PostParkingSpotServlet extends HttpServlet {
     }
     
     private Date convertStringToDate(String dateString){
-    	  SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/YYYY");
+    	  SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
     	  
     	  Date date = null;
     	  
     	  try {
 			date = formatter.parse(dateString);
+			System.out.println("the original date String: "+ dateString);
+			System.out.println("the date in Date format: " +date);
 		} catch (ParseException e) {
 			
 			e.printStackTrace();

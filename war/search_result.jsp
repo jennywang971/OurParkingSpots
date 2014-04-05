@@ -1,11 +1,20 @@
+<%@page import="com.google.appengine.repackaged.org.codehaus.jackson.map.ser.FilterProvider"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+
 <%@ page import="com.google.appengine.api.users.User" %>
 <%@ page import="com.google.appengine.api.users.UserService" %>
 <%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
 <%@ page import="com.google.appengine.api.datastore.DatastoreServiceFactory" %>
 <%@ page import="com.google.appengine.api.datastore.DatastoreService" %>
 <%@ page import="com.google.appengine.api.datastore.Query" %>
+<%@ page import="com.google.appengine.api.datastore.Query.Filter" %>
+<%@ page import="com.google.appengine.api.datastore.Query.FilterOperator" %>
+<%@ page import="com.google.appengine.api.datastore.Query.FilterPredicate" %>
+<%@ page import="com.google.appengine.api.datastore.Query.CompositeFilterOperator" %>
+
 <%@ page import="com.google.appengine.api.datastore.Entity" %>
 <%@ page import="com.google.appengine.api.datastore.FetchOptions" %>
 <%@ page import="com.google.appengine.api.datastore.Key" %>
@@ -25,6 +34,15 @@
 <%
     UserService userService = UserServiceFactory.getUserService();
     User user = userService.getCurrentUser();
+    String startDateString = request.getParameter("startdatepicker");
+    String endDateString = request.getParameter("enddatepicker");
+    
+    SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+	  
+	  Date startDate = formatter.parse(startDateString);
+	  Date endDate = formatter.parse(endDateString);
+	  
+
 %>
 	<div class="greeting">
 		<%    
@@ -66,10 +84,26 @@
 						"allParkingSpots");
 
 				// Get parking spots from the system
-				Query query = new Query("ParkingSpot", parkingSpotsKey).addSort(
-						"date", Query.SortDirection.DESCENDING);
+				
+				Query query = new Query("ParkingSpot", parkingSpotsKey)
+						.addSort("startDate", Query.SortDirection.DESCENDING)
+						.addSort("endDate", Query.SortDirection.ASCENDING);
+						
+				
+				// Add a filter that checks the start and end date
+		       Filter startDateFilter = new FilterPredicate("startDate", FilterOperator.LESS_THAN_OR_EQUAL, startDate);
+		        query.setFilter(startDateFilter);
+		
+		        
+		        Filter endDateFilter = new FilterPredicate("endDate", FilterOperator.GREATER_THAN_OR_EQUAL, endDate);
+		        
+		        //Filter dateRangeFilter = CompositeFilterOperator.and(startDateFilter, endDateFilter);
+		        //query.setFilter(endDateFilter); 
+		        //query.setFilter(dateRangeFilter); 
+
+		        
 				List<Entity> parkingSpots = datastore.prepare(query).asList(
-						FetchOptions.Builder.withLimit(10));
+						FetchOptions.Builder.withLimit(3));
 				if (parkingSpots.isEmpty()) {
 			%>
 			<p>There is no parking spots available nearby.</p>
@@ -93,7 +127,10 @@
             pageContext.setAttribute("greeting_latitude", (parkingSpot.getProperty("latitude")==null? "0": parkingSpot.getProperty("latitude")));
         	pageContext.setAttribute("greeting_longitude", (parkingSpot.getProperty("longitude")==null? "0": parkingSpot.getProperty("longitude")));
         	pageContext.setAttribute("greeting_accuracy", (parkingSpot.getProperty("accuracy")==null? "0": parkingSpot.getProperty("accuracy")));
-            String name;           
+        	pageContext.setAttribute("start_date", parkingSpot.getProperty("startDate"));
+        	pageContext.setAttribute("end_date", parkingSpot.getProperty("endDate"));
+            String name;    
+            
 
         	if (parkingSpot.getProperty("owner") == null) {
                 name = "Anonymous";
@@ -103,6 +140,7 @@
             } else {
                 pageContext.setAttribute("greeting_user", parkingSpot.getProperty("owner"));
                 name = pageContext.getAttribute("greeting_user").toString();
+               //startDate = pageContext.getAttribute("start_date").toString();
 %>
 
 			<p>
@@ -114,7 +152,8 @@
 %>
 			<blockquote>${fn:escapeXml(greeting_content)}</blockquote>
 			<p>(Location: ${fn:escapeXml(greeting_latitude)},
-				${fn:escapeXml(greeting_longitude)}. )</p>
+				${fn:escapeXml(greeting_longitude)}. )
+				Start Date: ....${fn:escapeXml(start_date)} End Date: ${fn:escapeXml(end_date)}</p>
 
 			<script type="text/javascript"> 
                 var userName = "<%=name%>";
