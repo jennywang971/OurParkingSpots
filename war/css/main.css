@@ -23,11 +23,11 @@ div#guestbook_header {
 	height: 20%;
 }
 
-div#guestbook_body {
+div#left_body {
 	bottom: 0;
-	height: 78%;
+	height: 80%;
 	overflow: auto;
-	margin-bottom: 80px;
+	margin-top: 20px;
 }
 
 div.left {

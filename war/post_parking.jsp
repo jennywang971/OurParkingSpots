@@ -1,7 +1,3 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
 <%@ include file="header1.jsp"%>
 <%-- <jsp:include page="/header1.jsp">
     <jsp:param name="post_parking" value="true"/>
@@ -11,9 +7,7 @@
 
 <div class="left">
 
-	<label for="latitude"> POST A SPOT!! <br /> Click on the map
-		to specify a location
-	</label>
+	<label for="latitude"> POST A SPOT!! <br /> Click on the map to specify a location </label>
 
 	<form action="/post_parking_spot" method="post" role="form">
 
@@ -33,8 +27,7 @@
 			<div class="form-group date post-parking-date-picker">
 				<div class="input-group date post-parking">
 					<input type="text" class="form-control" autocomplete="off"
-						id="startdatepicker" name="startdatepicker"
-						placeholder="Start Date" /> 
+						id="startdatepicker" name="startdatepicker" placeholder="Start Date" /> 
 						<span class="input-group-addon">
 					       <span class="glyphicon glyphicon-calendar"></span>
 					    </span>
@@ -68,16 +61,15 @@
 				</div>
 				<!-- /btn-group -->
 				<span class="input-group-addon">$</span>
-				<input type="text" step="any" min="0" class="form-control"> 
+				<input id="rate" name="rate" type="text" step="any" min="0" class="form-control"> 
 			</div>
 		</div>
 
 		<label for="content">DESCRIPTION</label>
 		<div class="row input-group post-parking">
-			<textarea class="form-control" name="content" rows="5" cols="100"
-				style="resize: none"></textarea>
-				</div>
-	   <div class="row input-group post-parking" style="float: right;">
+			<textarea class="form-control" name="content" rows="5" cols="100" style="resize: none"></textarea>
+		</div>
+	    <div class="row input-group post-parking" style="float: right;">
 			<button class="btn btn-default" type="submit" >Post Parking Spot</button>
 		</div>
 	</form>

@@ -1,4 +1,4 @@
-<%@page import="com.google.appengine.repackaged.org.codehaus.jackson.map.ser.FilterProvider"%>
+<%@ page import="com.google.appengine.repackaged.org.codehaus.jackson.map.ser.FilterProvider"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.text.SimpleDateFormat" %>
@@ -78,10 +78,8 @@
 		<div id="guestbook_header">
 			<%
 				
-				DatastoreService datastore = DatastoreServiceFactory
-						.getDatastoreService();
-				Key parkingSpotsKey = KeyFactory.createKey("ParkingSpots",
-						"allParkingSpots");
+				DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+				Key parkingSpotsKey = KeyFactory.createKey("ParkingSpots", "allParkingSpots");
 
 				// Get parking spots from the system
 				
@@ -102,8 +100,7 @@
 		        //query.setFilter(dateRangeFilter); 
 
 		        
-				List<Entity> parkingSpots = datastore.prepare(query).asList(
-						FetchOptions.Builder.withLimit(3));
+				List<Entity> parkingSpots = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(3));
 				if (parkingSpots.isEmpty()) {
 			%>
 			<p>There is no parking spots available nearby.</p>
@@ -117,7 +114,7 @@
 
 			
 		</div>
-		<div id="guestbook_body">
+		<div id="left_body">
 			<%
             
     if (!parkingSpots.isEmpty()) {

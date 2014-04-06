@@ -1,22 +1,32 @@
 "use strict";
 
 google.maps.visualRefresh = true;
-var mapOptions = {
-	zoom : 14
-};
 var map;
 var markers = [];
 var geocoder;
 
 function initialize() {
 
-	map = new google.maps.Map(document.getElementById("map-canvas"),
-			mapOptions);
+	var mapOptions = {
+			zoom: 12,
+			timeout : 5000,
+			maximumAge : 0,
+			enableHighAccuracy : true,
+			mapTypeControl: true,
+			mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
+			navigationControl: true,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+	};
+	
+	map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
 	setAllMap(map);
-	//geocoder = new google.maps.Geocoder();
-//	codeAddress();
 	
+	if(navigator.geolocation){
+		navigator.geolocation.getCurrentPosition(showPosition, handleNoGeolocation(true));
+	} else {
+		handleNoGeolocation(false);
+	}
 }
 
 //get map to display around the specified address
@@ -54,18 +64,13 @@ function showPosition(position){
 	// now we can set the map with current position
 	map.setCenter(map_position);
 
-	// set current Latitude and Longitude for guestbook entry
-/*	document.getElementById("latitude").value =  position.coords.latitude; 
-	document.getElementById("longitude").value = position.coords.longitude;
-	document.getElementById("accuracy").value = position.coords.accuracy; */
 }
 
 // if no geolocation is available, display reason and a default map
 function handleNoGeolocation(isSupported){
 	if(isSupported){
 		var content = 'Error: The Geolocation service failed';
-	}
-	else{
+	} else {
 		var content = 'Your browser doesn\'t support geolocation.';
 	}
 

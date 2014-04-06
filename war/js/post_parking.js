@@ -53,7 +53,7 @@ function initialize() {
 	}
 	
 	$(".dropdown-menu li a").click(function(){
-		if ($(this).text() == "Daily") {
+		if (!$(this).parent().hasClass("disabled")) {
 			$(this).parents(".input-group-btn").find('.btn').text($(this).text());
 			$(this).parents(".input-group-btn").find('.btn').val($(this).text());
 		}
@@ -74,18 +74,13 @@ function showPosition(position){
 	// now we can set the map with current position
 	map.setCenter(map_position);
 
-	// set current Latitude and Longitude for guestbook entry
-	/*	document.getElementById("latitude").value =  position.coords.latitude; 
-	document.getElementById("longitude").value = position.coords.longitude;
-	document.getElementById("accuracy").value = position.coords.accuracy; */
 }
 
 //if no geolocation is available, display reason and a default map
 function handleNoGeolocation(isSupported){
 	if(isSupported){
 		var content = 'Error: The Geolocation service failed';
-	}
-	else{
+	} else {
 		var content = 'Your browser doesn\'t support geolocation.';
 	}
 
@@ -98,8 +93,6 @@ function handleNoGeolocation(isSupported){
 	var infowindow = new google.maps.InfoWindow(options);
 
 	map.setCenter(options.positions);
-
-	// no need to set Latitude and Longitude for guestbook entry
 }
 
 
