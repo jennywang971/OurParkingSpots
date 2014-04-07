@@ -93,7 +93,7 @@
 		        query.setFilter(startDateFilter);
 		
 		        
-		        Filter endDateFilter = new FilterPredicate("endDate", FilterOperator.GREATER_THAN_OR_EQUAL, endDate);
+		        //Filter endDateFilter = new FilterPredicate("endDate", FilterOperator.GREATER_THAN_OR_EQUAL, endDate);
 		        
 		        //Filter dateRangeFilter = CompositeFilterOperator.and(startDateFilter, endDateFilter);
 		        //query.setFilter(endDateFilter); 
@@ -126,7 +126,9 @@
         	pageContext.setAttribute("greeting_accuracy", (parkingSpot.getProperty("accuracy")==null? "0": parkingSpot.getProperty("accuracy")));
         	pageContext.setAttribute("start_date", parkingSpot.getProperty("startDate"));
         	pageContext.setAttribute("end_date", parkingSpot.getProperty("endDate"));
-            String name;    
+        	pageContext.setAttribute("id", parkingSpot.getProperty("id"));
+            String name; 
+            Long id;
             
 
         	if (parkingSpot.getProperty("owner") == null) {
@@ -150,7 +152,8 @@
 			<blockquote>${fn:escapeXml(greeting_content)}</blockquote>
 			<p>(Location: ${fn:escapeXml(greeting_latitude)},
 				${fn:escapeXml(greeting_longitude)}. )
-				Start Date: ....${fn:escapeXml(start_date)} End Date: ${fn:escapeXml(end_date)}</p>
+				Start Date: ....${fn:escapeXml(start_date)} End Date: ${fn:escapeXml(end_date)}
+				ID:${fn:escapeXml(id)} </p>
 
 			<script type="text/javascript"> 
                 var userName = "<%=name%>";

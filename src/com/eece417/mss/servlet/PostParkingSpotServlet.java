@@ -18,10 +18,12 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
+
 @SuppressWarnings("serial")
 public class PostParkingSpotServlet extends HttpServlet {
 
-    @Override
+
+	@Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
                 throws IOException {
         UserService userService = UserServiceFactory.getUserService();
@@ -30,17 +32,21 @@ public class PostParkingSpotServlet extends HttpServlet {
         // for parking
         Key parkingSpotsKey = KeyFactory.createKey("ParkingSpots", "allParkingSpots");
         String parkingDescription = req.getParameter("content");
+        int rate = Integer.parseInt(req.getParameter("rate"));
         Entity parkingSpot = new Entity("ParkingSpot",parkingSpotsKey );
         Date date = new Date();
+        parkingSpot.setProperty("id", date.getTime());
         parkingSpot.setProperty("owner", user);
         parkingSpot.setProperty("date", date);
         parkingSpot.setProperty("description", parkingDescription);
+        parkingSpot.setProperty("rate", rate);
       
         // getting Latitude, Longitude, available start and end date
         String latitude = req.getParameter("latitude");
         String longitude = req.getParameter("longitude");
         parkingSpot.setProperty("latitude", latitude);
         parkingSpot.setProperty("longitude", longitude);
+        
         
   
         String startDateString = req.getParameter("startdatepicker");
@@ -56,15 +62,15 @@ public class PostParkingSpotServlet extends HttpServlet {
         resp.sendRedirect("/index.jsp");
     }
     
-    private Date convertStringToDate(String dateString){
+    public Date convertStringToDate(String dateString){
     	  SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
     	  
     	  Date date = null;
     	  
     	  try {
 			date = formatter.parse(dateString);
-			System.out.println("the original date String: "+ dateString);
-			System.out.println("the date in Date format: " +date);
+//			System.out.println("the original date String: "+ dateString);
+//			System.out.println("the date in Date format: " +date);
 		} catch (ParseException e) {
 			
 			e.printStackTrace();
