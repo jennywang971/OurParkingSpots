@@ -17,7 +17,7 @@
 	
 		<servlet>
 		<servlet-name>ReserveParkingSpot</servlet-name>
-		<servlet-class>com.eece417.mss.ReserveParkingSpotServlet</servlet-class>
+		<servlet-class>com.eece417.mss.servlet.ReserveParkingSpotServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ReserveParkingSpot</servlet-name>
