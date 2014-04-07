@@ -1,9 +1,9 @@
 package com.eece417.mss;
 
 import java.io.IOException;
-import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,66 +18,54 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
-
 @SuppressWarnings("serial")
-public class PostParkingSpotServlet extends HttpServlet {
-
+public class ReserveParkingSpotServlet extends HttpServlet {
 
 	@Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
                 throws IOException {
-        UserService userService = UserServiceFactory.getUserService();
+		
+		UserService userService = UserServiceFactory.getUserService();
         User user = userService.getCurrentUser();
  
-        // for parking
-        Key parkingSpotsKey = KeyFactory.createKey("ParkingSpots", "allParkingSpots");
-        String parkingDescription = req.getParameter("content");
+        // for reserving
+        Key reservationKey  = KeyFactory.createKey("ReservedSpots", "allReservedSpots");
+        
         int rate = Integer.parseInt(req.getParameter("rate"));
-        Entity parkingSpot = new Entity("ParkingSpot",parkingSpotsKey );
+        Entity reservation = new Entity("Reservation",reservationKey );
         Date date = new Date();
-        parkingSpot.setProperty("id", date.getTime());
-        parkingSpot.setProperty("owner", user);
-        parkingSpot.setProperty("date", date);
-        parkingSpot.setProperty("description", parkingDescription);
-        parkingSpot.setProperty("rate", rate);
+        reservation.setProperty("id", date.getTime());
+        reservation.setProperty("renter", user);
+        reservation.setProperty("date", date);
+        reservation.setProperty("rate", rate);
       
-        // getting Latitude, Longitude, available start and end date
-        String latitude = req.getParameter("latitude");
-        String longitude = req.getParameter("longitude");
-        parkingSpot.setProperty("latitude", latitude);
-        parkingSpot.setProperty("longitude", longitude);
-        
-        
-  
         String startDateString = req.getParameter("startdatepicker");
         String endDateString = req.getParameter("enddatepicker");
         Date startDate = convertStringToDate(startDateString);
         Date endDate = convertStringToDate(endDateString);
-        parkingSpot.setProperty("startDate", startDate);
-        parkingSpot.setProperty("endDate", endDate);
+        reservation.setProperty("startDate", startDate);
+        reservation.setProperty("endDate", endDate);
 
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-        datastore.put(parkingSpot);
+        datastore.put(reservation);
 
-        resp.sendRedirect("/index.jsp");
-    }
-    
+        resp.sendRedirect("/index.jsp"); // change to other page?
+	}
+
+	
     public Date convertStringToDate(String dateString){
-    	  SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-    	  
-    	  Date date = null;
-    	  
-    	  try {
+  	  SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+  	  
+  	  Date date = null;
+  	  
+  	  try {
 			date = formatter.parse(dateString);
-//			System.out.println("the original date String: "+ dateString);
-//			System.out.println("the date in Date format: " +date);
+		
 		} catch (ParseException e) {
 			
 			e.printStackTrace();
 		}
-    	
-    	  return date;
-    }
-
-
+  	
+  	  return date;
+  }
 }

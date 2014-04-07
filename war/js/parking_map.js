@@ -54,10 +54,7 @@ function showPosition(position){
 	// now we can set the map with current position
 	map.setCenter(map_position);
 
-	// set current Latitude and Longitude for guestbook entry
-/*	document.getElementById("latitude").value =  position.coords.latitude; 
-	document.getElementById("longitude").value = position.coords.longitude;
-	document.getElementById("accuracy").value = position.coords.accuracy; */
+
 }
 
 // if no geolocation is available, display reason and a default map
