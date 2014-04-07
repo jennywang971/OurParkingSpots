@@ -8,7 +8,7 @@
 
 	<servlet>
 		<servlet-name>PostParkingSpot</servlet-name>
-		<servlet-class>com.eece417.mss.PostParkingSpotServlet</servlet-class>
+		<servlet-class>com.eece417.mss.servlet.PostParkingSpotServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>PostParkingSpot</servlet-name>

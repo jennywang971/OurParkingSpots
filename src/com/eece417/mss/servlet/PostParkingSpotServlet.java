@@ -1,4 +1,4 @@
-package com.eece417.mss;
+package com.eece417.mss.servlet;
 
 import java.io.IOException;
 import java.util.Date;

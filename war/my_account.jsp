@@ -8,7 +8,6 @@
         .addSort("startDate", Query.SortDirection.DESCENDING)
         .addSort("endDate", Query.SortDirection.ASCENDING);
                         
-    // Add a filter that checks the start and end date
     Filter startDateFilter = new FilterPredicate("owner", FilterOperator.EQUAL, user);
     query.setFilter(startDateFilter);
     
