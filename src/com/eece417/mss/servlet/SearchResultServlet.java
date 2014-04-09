@@ -27,12 +27,12 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
-public class SearchResult extends HttpServlet {
+public class SearchResultServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
 	private final static String SEARCH_RESULT_URL = "/WEB-INF/SearchResult.jsp";
-	private final static Logger LOGGER = Logger.getLogger(SearchResult.class.getName()); 
+	private final static Logger LOGGER = Logger.getLogger(SearchResultServlet.class.getName()); 
 	private final static SimpleDateFormat FORMATTER = new SimpleDateFormat("MM/dd/yyyy");
 	private Date startDate, endDate;
 

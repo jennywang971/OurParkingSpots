@@ -22,7 +22,7 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
-public class MyAccount extends HttpServlet {
+public class MyAccountServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
