@@ -18,8 +18,9 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
-@SuppressWarnings("serial")
 public class ReserveParkingSpotServlet extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
 
 	@Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp)

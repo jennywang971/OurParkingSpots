@@ -27,9 +27,10 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
-@SuppressWarnings("serial")
 public class SearchResult extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+	
 	private final static String SEARCH_RESULT_URL = "/WEB-INF/SearchResult.jsp";
 	private final static Logger LOGGER = Logger.getLogger(SearchResult.class.getName()); 
 	private final static SimpleDateFormat FORMATTER = new SimpleDateFormat("MM/dd/yyyy");
