@@ -5,6 +5,14 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 
+    <servlet>
+        <servlet-name>Index</servlet-name>
+        <servlet-class>com.eece417.mss.servlet.Index</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Index</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
 
 	<servlet>
 		<servlet-name>PostParkingSpot</servlet-name>
@@ -15,7 +23,7 @@
 		<url-pattern>/post_parking_spot</url-pattern>
 	</servlet-mapping>
 	
-		<servlet>
+	<servlet>
 		<servlet-name>ReserveParkingSpot</servlet-name>
 		<servlet-class>com.eece417.mss.servlet.ReserveParkingSpotServlet</servlet-class>
 	</servlet>
@@ -23,7 +31,35 @@
 		<servlet-name>ReserveParkingSpot</servlet-name>
 		<url-pattern>/reserve_parking_spot</url-pattern>
 	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>SearchResult</servlet-name>
+		<servlet-class>com.eece417.mss.servlet.SearchResult</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SearchResult</servlet-name>
+		<url-pattern>/search_result</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>MyAccount</servlet-name>
+		<servlet-class>com.eece417.mss.servlet.MyAccount</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MyAccount</servlet-name>
+		<url-pattern>/my_account</url-pattern>
+	</servlet-mapping>
 	
+	<filter>
+	     <filter-name>myFilter</filter-name>
+	     <filter-class>com.eece417.mss.servlet.ServletFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+         <filter-name>myFilter</filter-name>
+         <url-pattern>/my_account</url-pattern>
+         <url-pattern>/post_parking_spot</url-pattern>
+    </filter-mapping>
 	
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
