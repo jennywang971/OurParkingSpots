@@ -7,7 +7,7 @@
 
     <servlet>
         <servlet-name>Index</servlet-name>
-        <servlet-class>com.eece417.mss.servlet.Index</servlet-class>
+        <servlet-class>com.eece417.mss.servlet.IndexServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
@@ -34,7 +34,7 @@
 
 	<servlet>
 		<servlet-name>SearchResult</servlet-name>
-		<servlet-class>com.eece417.mss.servlet.SearchResult</servlet-class>
+		<servlet-class>com.eece417.mss.servlet.SearchResultServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>SearchResult</servlet-name>
@@ -43,7 +43,7 @@
 
 	<servlet>
 		<servlet-name>MyAccount</servlet-name>
-		<servlet-class>com.eece417.mss.servlet.MyAccount</servlet-class>
+		<servlet-class>com.eece417.mss.servlet.MyAccountServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>MyAccount</servlet-name>
