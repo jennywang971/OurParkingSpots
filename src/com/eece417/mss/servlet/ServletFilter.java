@@ -33,7 +33,6 @@ public class ServletFilter implements Filter {
 		UserService userService = UserServiceFactory.getUserService();
 		String uri = req.getRequestURI();
 		String loginURL = userService.createLoginURL(uri);
-		System.out.println(uri + " ---> " + loginURL);
 		User user = userService.getCurrentUser();
 
 		if (user == null) {

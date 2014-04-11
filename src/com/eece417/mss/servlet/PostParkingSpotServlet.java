@@ -21,8 +21,9 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
 
-@SuppressWarnings("serial")
 public class PostParkingSpotServlet extends HttpServlet {
+	
+	private static final long serialVersionUID = 1L;
 	
 	private final static String POST_PARKING_URL = "/WEB-INF/PostParkingSpot.jsp";
 	private final static Logger LOGGER = Logger.getLogger(PostParkingSpotServlet.class.getName()); 
