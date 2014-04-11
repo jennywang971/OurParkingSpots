@@ -67,7 +67,7 @@ public class PostParkingSpotServlet extends HttpServlet {
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         datastore.put(parkingSpot);
 
-        resp.sendRedirect("/WEB-INF/index.jsp");
+        resp.sendRedirect("/my_account");
     }
     
     public Date convertStringToDate(String dateString){
