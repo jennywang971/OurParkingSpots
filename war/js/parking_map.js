@@ -80,10 +80,13 @@ function handleNoGeolocation(isSupported){
 
 function addMarker(coord, title){
 
+	var icon = 'https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png';
+	
 	var marker = new google.maps.Marker({
 		map : map,
 		position: coord,
 		animation : google.maps.Animation.DROP,
+		icon: icon,
 		title: title
 	});
 	

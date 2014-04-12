@@ -78,7 +78,7 @@ public class SearchResultServlet extends HttpServlet {
 			req.getRequestDispatcher(SEARCH_RESULT_URL).forward(req, res);
 
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+			
 			LOGGER.warning("Search Result Exception: " + e.getMessage());
 		}
 	}

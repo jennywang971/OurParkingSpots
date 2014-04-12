@@ -25,6 +25,7 @@
 
 <%
     String uri = request.getRequestURI();
+	System.out.println("test: " +uri);
     uri = uri.substring(uri.lastIndexOf("/"), uri.lastIndexOf(".jsp"));
 	UserService userService = UserServiceFactory.getUserService();
     User user = userService.getCurrentUser();
@@ -32,8 +33,7 @@
     pageContext.setAttribute("loginURL", userService.createLoginURL(uri));
     pageContext.setAttribute("logoutURL", userService.createLogoutURL("/"));
 
-  /*   DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    Key parkingSpotsKey = KeyFactory.createKey("ParkingSpots", "allParkingSpots"); */
+
 %>
 
 <!DOCTYPE html>
