@@ -24,14 +24,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%
-	
-    String uri = request.getAttribute("javax.servlet.forward.request_uri").toString();
-    String queryString = request.getQueryString();
+    String uri = request.getRequestURI();
+	System.out.println("test: " +uri);
+    uri = uri.substring(uri.lastIndexOf("/"), uri.lastIndexOf(".jsp"));
 	UserService userService = UserServiceFactory.getUserService();
     User user = userService.getCurrentUser();
     pageContext.setAttribute("user", user); 
-    pageContext.setAttribute("loginURL", userService.createLoginURL(uri + "?" + queryString));
+    pageContext.setAttribute("loginURL", userService.createLoginURL(uri));
     pageContext.setAttribute("logoutURL", userService.createLogoutURL("/"));
+
 
 %>
 

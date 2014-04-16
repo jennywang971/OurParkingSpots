@@ -83,4 +83,9 @@ public class SearchResultServlet extends HttpServlet {
 		}
 	}
 
+	@Override 
+	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+
+		req.getRequestDispatcher(SEARCH_RESULT_URL).forward(req, res);
+	}
 }
