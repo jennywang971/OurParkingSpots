@@ -82,10 +82,4 @@ public class SearchResultServlet extends HttpServlet {
 			LOGGER.warning("Search Result Exception: " + e.getMessage());
 		}
 	}
-
-	@Override 
-	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-
-		req.getRequestDispatcher(SEARCH_RESULT_URL).forward(req, res);
-	}
 }
