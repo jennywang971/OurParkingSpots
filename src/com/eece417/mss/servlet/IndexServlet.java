@@ -16,8 +16,4 @@ public class IndexServlet extends HttpServlet{
         req.getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);
 	}
 	
-	@Override
-    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
-	}
 }

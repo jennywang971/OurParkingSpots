@@ -1,5 +1,5 @@
 <%@ include file="header.jsp"%>
-<script src="js/map.js"> </script>
+<script src="/js/map.js"> </script>
 
     <div class="left">
     

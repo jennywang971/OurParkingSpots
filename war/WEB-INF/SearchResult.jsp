@@ -1,5 +1,5 @@
 <%@ include file="header.jsp"%>
-<script src="/js/abc.js"> </script>
+<script src="/js/search_field.js"> </script>
 <script src="/js/parking_map.js"> </script>
 <script>codeAddress("${param.location}");</script>
 
@@ -67,7 +67,7 @@
 						        <c:out value="ID = ${parkingSpot.properties.id}" />
 						  </footer>
 						  <footer>
-							    <fmt:formatDate pattern="MM/dd" value="${parkingSpot.properties.startDate}" /> ~
+							    <fmt:formatDate pattern="MM/dd" value="${parkingSpot.properties.startDate}" />
 							    <fmt:formatDate pattern="MM/dd" value="${parkingSpot.properties.endDate}" />
 						  </footer>
 						  <footer>
