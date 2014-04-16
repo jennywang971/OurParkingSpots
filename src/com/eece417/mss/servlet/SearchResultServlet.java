@@ -66,7 +66,7 @@ public class SearchResultServlet extends HttpServlet {
 				Entity e = iter.next();
 				Date end = (Date) e.getProperty("endDate");
 
-				if (end != null && end.after(endDate))
+				if (end != null && endDate.after(end))
 					// remove search results where the end date is after the search query specified
 					iter.remove();
 			}
@@ -79,5 +79,4 @@ public class SearchResultServlet extends HttpServlet {
 			LOGGER.warning("Search Result Exception: " + e.getMessage());
 		}
 	}
-
 }

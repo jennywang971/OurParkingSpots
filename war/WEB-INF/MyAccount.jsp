@@ -18,7 +18,7 @@
                 	<p>You have not posted any parking spots.</p>
                 </c:when>
                 <c:otherwise>
-                    <p>Available parking spots for <c:out value="${user}"/>...</p>
+                    <p>Parking spots for <c:out value="${gaeUser}"/>...</p>
                 </c:otherwise>
             </c:choose>
                 
