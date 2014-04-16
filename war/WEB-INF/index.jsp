@@ -1,5 +1,5 @@
 <%@ include file="header.jsp" %>
-<script src="/js/abc.js"></script>
+<script src="/js/search_field.js"></script>
 
 	<div id="search-area">
 		<div class="container">
