@@ -66,15 +66,12 @@ public class SearchResultServlet extends HttpServlet {
 				Entity e = iter.next();
 				Date end = (Date) e.getProperty("endDate");
 
-				if (end != null && end.after(endDate))
+				if (end != null && endDate.after(end))
 					// remove search results where the end date is after the search query specified
 					iter.remove();
 			}
 
 			req.setAttribute("parkingSpots", parkingSpots);
-			req.setAttribute("location", req.getParameter("location"));
-			req.setAttribute("startdatepicker", startDate);
-			req.setAttribute("enddatepicker", endDate);
 			req.getRequestDispatcher(SEARCH_RESULT_URL).forward(req, res);
 
 		} catch (ParseException e) {
