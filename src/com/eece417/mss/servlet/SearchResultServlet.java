@@ -72,9 +72,6 @@ public class SearchResultServlet extends HttpServlet {
 			}
 
 			req.setAttribute("parkingSpots", parkingSpots);
-			req.setAttribute("location", req.getParameter("location"));
-			req.setAttribute("startdatepicker", startDate);
-			req.setAttribute("enddatepicker", endDate);
 			req.getRequestDispatcher(SEARCH_RESULT_URL).forward(req, res);
 
 		} catch (ParseException e) {

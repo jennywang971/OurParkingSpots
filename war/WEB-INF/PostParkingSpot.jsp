@@ -1,6 +1,6 @@
 <%@ include file="header.jsp"%>
-<script src="js/post_parking.js"> </script>
-<script src="js/serach_field.js"> </script>
+<script src="/js/post_parking.js"> </script>
+<script src="/js/serach_field.js"> </script>
 
 <div class="left">
 
