@@ -82,5 +82,4 @@ public class SearchResultServlet extends HttpServlet {
 			LOGGER.warning("Search Result Exception: " + e.getMessage());
 		}
 	}
-
 }
