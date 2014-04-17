@@ -49,6 +49,7 @@
         <link rel="stylesheet" href="/css/main1.css" />
         <script src="//maps.googleapis.com/maps/api/js?sensor=true&amp;libraries=places&v=3"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
         <script src="/js/jquery.geocomplete.min.js"></script>
         <script src="/js/bootstrap-datepicker.js"></script>

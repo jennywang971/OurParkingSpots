@@ -11,6 +11,10 @@ var infowindow = new google.maps.InfoWindow( {
 
 function initialize() {
 
+	var alert_msg = '';
+	var rate_option = '';
+	var rate_regex = new RegExp("\d+(\.\d{1,2})?");
+	
 	var mapOptions = {
 			zoom: 12,
 			timeout : 5000,
@@ -56,6 +60,28 @@ function initialize() {
 		if (!$(this).parent().hasClass("disabled")) {
 			$(this).parents(".input-group-btn").find('.btn').text($(this).text());
 			$(this).parents(".input-group-btn").find('.btn').val($(this).text());
+			rate_option = $(this).text();
+		}
+	});
+	
+	$("#post_btn").click(function() {
+		//not sure why it doesnt come in sometimes...
+		
+		if (rate_option.length == 0) {
+			alert_msg = "Please select a rate option </br>";
+			$("#rate_option").addClass("has-error");	//not working
+			return;
+		}
+		if (!rate_regex.test($("#rate").val())) {
+			alert_msg = alert_msg.concat("Please enter a valid currency rate");
+			$("#rate").addClass("has-error");
+			return;
+		}
+		
+		if (alert_msg.length > 0) {
+			alert(alert_msg);
+		} else {
+			document.forms['post_parking'].submit();
 		}
 	});
 }
