@@ -58,7 +58,7 @@
 					</ul>
 				</div>
 				<!-- /btn-group -->
-				<span class="input-group-addon">$</span>
+				<span class="input-group-addon">$CAD</span>
 				<input id="rate" name="rate" type="text" step="any" min="0" class="form-control" required> 
 			</div>
 		</div>

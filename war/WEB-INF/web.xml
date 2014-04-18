@@ -40,6 +40,15 @@
 		<servlet-name>SearchResult</servlet-name>
 		<url-pattern>/search_result</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+        <servlet-name>DeleteParking</servlet-name>
+        <servlet-class>com.eece417.mss.servlet.DeleteParkingSpotServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteParking</servlet-name>
+        <url-pattern>/delete_parking</url-pattern>
+    </servlet-mapping>
 
 	<servlet>
 		<servlet-name>MyAccount</servlet-name>

@@ -28,15 +28,21 @@
                         <script> 
                             addMarker(new google.maps.LatLng("${parkingSpot.properties.latitude}", "${parkingSpot.properties.longitude}"), "${user}"); 
                         </script>
-                        <blockquote>
-                            <p><c:out value="${parkingSpot.properties.description}"/></p>
-                            <footer>
-                                <fmt:formatDate pattern="MM/dd" value="${parkingSpot.properties.startDate}" /> ~
-                                <fmt:formatDate pattern="MM/dd" value="${parkingSpot.properties.endDate}" />
-                            </footer>
-                            <footer>
-                                [<c:out value="${parkingSpot.properties.latitude}"/>, <c:out value="${parkingSpot.properties.longitude}"/>]</footer>
-                        </blockquote>
+                        <div class="input-group">
+                            <blockquote>
+                                <p><c:out value="${parkingSpot.properties.description}"/></p>
+                                <footer>
+                                    <fmt:formatDate pattern="MM/dd" value="${parkingSpot.properties.startDate}" /> ~
+                                    <fmt:formatDate pattern="MM/dd" value="${parkingSpot.properties.endDate}" />
+                                </footer>
+                                <footer>
+                                    [<c:out value="${parkingSpot.properties.latitude}"/>, <c:out value="${parkingSpot.properties.longitude}"/>]
+                                </footer>
+                            </blockquote>
+                            <input type="hidden" value="${parkingSpot.properties.id}" />
+                            <span class="input-group-addon trash glyphicon glyphicon-trash">
+                            </span>             
+                        </div>
                     </c:if>
                 </c:forEach>
             </c:if>

@@ -4,6 +4,7 @@ google.maps.visualRefresh = true;
 var map;
 var markers = [];
 var geocoder;
+var xmlHttpReq = null;
 
 function initialize() {
 
@@ -27,6 +28,12 @@ function initialize() {
 	} else {
 		handleNoGeolocation(false);
 	}
+	
+	$(".glyphicon-trash").click(function() {
+		alert($(this).prev().val());
+		
+		postAjaxRequest($(this).prev().val());
+	});
 }
 
 //get map to display around the specified address
@@ -45,6 +52,7 @@ function codeAddress(sAddress){
 		}
 	}); 
 }
+
 // show position when geolocation is supported and succeeded
 function showPosition(position){
 	var map_position = new google.maps.LatLng(position.coords.latitude,
@@ -113,3 +121,47 @@ function setAllMap(map) {
 } 
 
 google.maps.event.addDomListener(window,'load', initialize);
+
+function postAjaxRequest(id) {
+
+	try {
+		xmlHttpReq = new XMLHttpRequest();
+		xmlHttpReq.onreadystatechange = httpCallBackFunction_postAjaxRequest;
+		var url = "/delete_parking";
+	
+		xmlHttpReq.open("POST", url, true);
+		xmlHttpReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');		
+		
+		xmlHttpReq.send("id=" + id);
+
+	} catch (e) {
+    	alert("Error: " + e);
+	}	
+}
+
+function httpCallBackFunction_postAjaxRequest() {
+	//alert("httpCallBackFunction_postAjaxRequest");
+	
+	if (xmlHttpReq.readyState == 1){
+		//updateStatusMessage("<blink>Opening HTTP...</blink>");
+	}else if (xmlHttpReq.readyState == 2){
+		//updateStatusMessage("<blink>Sending query...</blink>");
+	}else if (xmlHttpReq.readyState == 3){ 
+		//updateStatusMessage("<blink>Receiving...</blink>");
+	}else if (xmlHttpReq.readyState == 4){
+		var xmlDoc = null;
+
+		if(xmlHttpReq.responseXML){
+			xmlDoc = xmlHttpReq.responseXML;			
+		}else if(xmlHttpReq.responseText){
+			var parser = new DOMParser();
+		 	xmlDoc = parser.parseFromString(xmlHttpReq.responseText,"text/xml");		 		
+		}
+		
+		if(xmlDoc){				
+			xmlHttpReq.send(xmlHttpReq.responseText);
+		}else{
+			alert("No data.");
+		}	
+	}		
+}

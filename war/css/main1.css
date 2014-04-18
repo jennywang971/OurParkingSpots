@@ -75,3 +75,9 @@ input[type="submit"].form-control {
     width: 49.4%;
     display: inline-block
 }
+
+.trash {
+  	background-color: white;
+	border-style: none; 
+	cursor: pointer;
+}
