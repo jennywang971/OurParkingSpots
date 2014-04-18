@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -52,6 +55,8 @@ public class SearchResultServlet extends HttpServlet {
 
 			startDate = FORMATTER.parse(startDateString);
 			endDate = FORMATTER.parse(endDateString);
+			
+			int dayDiff = Days.daysBetween(new DateTime(startDate), new DateTime(endDate)).getDays() + 1;
 
 			Query query = new Query("ParkingSpot", parkingSpotsKey)
 				.addSort("startDate", Query.SortDirection.DESCENDING)
@@ -72,6 +77,7 @@ public class SearchResultServlet extends HttpServlet {
 			}
 
 			req.setAttribute("parkingSpots", parkingSpots);
+			req.setAttribute("duration", dayDiff);
 			req.getRequestDispatcher(SEARCH_RESULT_URL).forward(req, res);
 
 		} catch (ParseException e) {

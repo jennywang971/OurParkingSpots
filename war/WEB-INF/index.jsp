@@ -59,7 +59,7 @@
 					ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
 					magna mollis euismod. Donec sed odio dui.</p>
 				<p>
-					<a class="btn btn-default" href="#" role="button">View details
+					<a class="btn btn-default" href="#" role="button">View detail
 						&raquo;</a>
 				</p>
 			</div>
@@ -70,7 +70,7 @@
 					ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
 					magna mollis euismod. Donec sed odio dui.</p>
 				<p>
-					<a class="btn btn-default" href="#" role="button">View details
+					<a class="btn btn-default" href="#" role="button">View detail
 						&raquo;</a>
 				</p>
 			</div>
@@ -81,7 +81,7 @@
 					Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum
 					nibh, ut fermentum massa justo sit amet risus.</p>
 				<p>
-					<a class="btn btn-default" href="#" role="button">View details
+					<a class="btn btn-default" href="#" role="button">View detail
 						&raquo;</a>
 				</p>
 			</div>

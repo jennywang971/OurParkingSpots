@@ -75,3 +75,7 @@ input[type="submit"].form-control {
     width: 49.4%;
     display: inline-block
 }
+
+.modal-body label {
+	width: 50%;
+}

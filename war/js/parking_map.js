@@ -14,6 +14,7 @@ function initialize() {
 			mapOptions);
 
 	setAllMap(map);
+
 	//geocoder = new google.maps.Geocoder();
 //	codeAddress();
 	
@@ -78,9 +79,11 @@ function handleNoGeolocation(isSupported){
 
 }
 
-function addMarker(coord, title){
+function addMarker(coord, id, description, rate, duration){
 
 	var icon = 'https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png';
+
+	var title = "$" + rate + " CAD" + " per day"
 	
 	var marker = new google.maps.Marker({
 		map : map,
@@ -91,16 +94,15 @@ function addMarker(coord, title){
 	});
 	
 	markers.push(marker);
+	
+	google.maps.event.addListener(marker, 'click', function() {
+		$("#description-info").text(description);
+		$("#rate-info").text("$" + rate + " CAD" + " per day");
+		$("#total-price-info").text("$" +  parseInt(rate) * parseInt(duration) + " CAD");
+		$("#parkingInfoModal").modal();
+	});
 }
 
-function addInfoWindow(){
-	// alert("adding infor window");
-//	var spotInfo = " Parking spot info ";
-//	var spotInfoWindow = new google.maps.InfoWindow({
-//        content: spotInfo,
-//        map: map
-//    }); 
-}
 function setAllMap(map) {
 	for (var i = 0; i < markers.length; i++) {
 		markers[i].setMap(map);

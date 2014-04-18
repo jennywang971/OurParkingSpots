@@ -55,8 +55,11 @@
 			    <c:forEach items="${parkingSpots}" var="parkingSpot">
 				    <c:if test="${!empty parkingSpot.key}">
 					   <script> 
-                            addMarker(new google.maps.LatLng("${parkingSpot.properties.latitude}", "${parkingSpot.properties.longitude}"), "${parkingSpot.properties.owner}"); 
-                            addInfoWindow();
+                            addMarker(new google.maps.LatLng("${parkingSpot.properties.latitude}", "${parkingSpot.properties.longitude}"),  
+                            		"${parkingSpot.properties.id}",
+                            		"${parkingSpot.properties.description}",
+                            		"${parkingSpot.properties.rate}",
+                            		"${duration}"); 
                        </script>
                        <b><c:out value="${parkingSpot.properties.owner}"/></b> posted a parking spot...
 					   <blockquote>
@@ -84,5 +87,29 @@
 		</div>
 	</div>
 	<div id="map-canvas"> </div>
+	
+	<!-- Modal -->
+	<div class="modal fade" id="parkingInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title" id="myModalLabel">Parking Spot Info</h4>
+	      </div>
+	      <div class="modal-body">
+	      	<div><p id="description-info"></p></div>
+	        <div><label>Start Date</label>${param.startdatepicker}</div>
+	        <div><label>End Date</label>${param.enddatepicker}</div>
+	        <div><label>Duration</label>${duration} days</div>
+	        <div><label>Rate</label><span id="rate-info"></span></div>
+	        <div><label>Total Price</label><span id="total-price-info"></span></div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">View detail</button>
+	        <button type="button" class="btn btn-success">Book this spot</button>
+	      </div>
+	    </div>
+	  </div>
+    </div>
   </body>
 </html>

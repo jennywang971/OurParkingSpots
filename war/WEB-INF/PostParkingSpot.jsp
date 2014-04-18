@@ -4,7 +4,7 @@
 
 <div class="left">
 
-	<label for="latitude"> POST A SPOT!! <br /> Click on the map to specify a location </label>
+	<label> POST A SPOT!! <br /> Click on the map to specify a location </label>
 
 	<form action="/post_parking_spot" method="post" role="form">
 
@@ -18,7 +18,7 @@
 			</div>
 		</div>
 
-		<label for="startdatepicker">AVAILABLE TIME</label>
+		<label>AVAILABLE TIME</label>
 
 		<div class="row">
 			<div class="form-group date post-parking-date-picker">
