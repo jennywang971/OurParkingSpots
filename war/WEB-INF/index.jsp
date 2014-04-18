@@ -9,12 +9,12 @@
 					<h2>Grandpas needn't worry about parking in downtown Vancouver
 						for his vintage car.</h2>
 			
-						<form class="form-inline" action="/search_result" method="get"
-						role="form">
+						<form class="form-inline" action="/search_result" method="get" id="search_form" role="form">
+
 						<div class="row">
 							<div class="form-group col-md-6">
 								<input type="text" class="form-control" id="location"
-									autocomplete="off" name="location"
+									autocomplete="off" name="location" required
 									placeholder="Where do you want to park?" />
 							</div>
 
@@ -40,7 +40,7 @@
 							<div class="form-group col-md-2">
 								<input type="submit"
 									class="form-control btn btn-primary btn-large"
-									id="submit_location" value="Search" />
+									id="search_btn" value="Search" />
 							</div>
 						</div>
 					</form>

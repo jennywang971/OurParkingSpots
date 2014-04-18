@@ -79,3 +79,9 @@ input[type="submit"].form-control {
 .modal-body label {
 	width: 50%;
 }
+
+.trash {
+  	background-color: white;
+	border-style: none; 
+	cursor: pointer;
+}

@@ -3,10 +3,13 @@ package com.eece417.mss.servlet;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -42,16 +45,20 @@ public class SearchResultServlet extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-		UserService userService = UserServiceFactory.getUserService();
-		User user = userService.getCurrentUser();
-
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Key parkingSpotsKey = KeyFactory.createKey("ParkingSpots", "allParkingSpots");
+		
+		Calendar today = Calendar.getInstance();
 
 		try {
 
 			String startDateString = req.getParameter("startdatepicker");
 			String endDateString = req.getParameter("enddatepicker");
+			
+			startDate = validate(startDateString) ? FORMATTER.parse(startDateString) : FORMATTER.parse(FORMATTER.format(today.getTime()));
+			
+			today.add(Calendar.DATE, 7);
+			endDate = validate(endDateString) ? FORMATTER.parse(startDateString) : FORMATTER.parse(FORMATTER.format(today.getTime()));
 
 			startDate = FORMATTER.parse(startDateString);
 			endDate = FORMATTER.parse(endDateString);
@@ -78,11 +85,21 @@ public class SearchResultServlet extends HttpServlet {
 
 			req.setAttribute("parkingSpots", parkingSpots);
 			req.setAttribute("duration", dayDiff);
+			req.setAttribute("startDate", FORMATTER.format(startDate));
+			req.setAttribute("endDate", FORMATTER.format(endDate));
 			req.getRequestDispatcher(SEARCH_RESULT_URL).forward(req, res);
 
 		} catch (ParseException e) {
 			
 			LOGGER.warning("Search Result Exception: " + e.getMessage());
 		}
+	}
+	
+	public boolean validate (String str) {
+
+		Pattern r = Pattern.compile("\\d{2}/\\d{2}/\\d{4}");
+		Matcher m = r.matcher(str);
+
+		return m.find() ? true : false; 
 	}
 }

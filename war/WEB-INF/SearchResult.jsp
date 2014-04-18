@@ -16,7 +16,7 @@
            </div>
                <div class="form-group date post-parking-date-picker">
                    <div class="input-group date search-result">
-                       <input type="text" class="form-control" autocomplete="off" value="${param.startdatepicker}"
+                       <input type="text" class="form-control" autocomplete="off" value="${startDate}"
                            id="startdatepicker" name="startdatepicker" placeholder="Start Date" /> 
                        <span class="input-group-addon">
                            <span class="glyphicon glyphicon-calendar"></span>
@@ -26,7 +26,7 @@
     
                 <div class="form-group date post-parking-date-picker">
                     <div class="input-group date search-result">
-                        <input type="text" class="form-control" autocomplete="off" value="${param.enddatepicker}"
+                        <input type="text" class="form-control" autocomplete="off" value="${endDate}"
                             id="enddatepicker" name="enddatepicker" placeholder="End Date" />
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
@@ -75,9 +75,6 @@
 						  </footer>
 						  <footer>
 							    [ <c:out value="${parkingSpot.properties.latitude}" /> , <c:out value="${parkingSpot.properties.longitude}" /> ]
-						  </footer>
-						  <footer>
-						          <c:out value="Accuracy = ${parkingSpot.properties.accuracy}"/>
 						  </footer>
 					   </blockquote>
 				    </c:if>
