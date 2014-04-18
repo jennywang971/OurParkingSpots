@@ -80,6 +80,10 @@ input[type="submit"].form-control {
 	width: 50%;
 }
 
+.modal-header, .modal-footer {
+	background-color: #eee;
+}
+
 .trash {
   	background-color: white;
 	border-style: none; 

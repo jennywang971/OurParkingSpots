@@ -42,7 +42,7 @@ public class PostParkingSpotServlet extends HttpServlet {
  
         // for parking
         Key parkingSpotsKey = KeyFactory.createKey("ParkingSpots", "allParkingSpots");
-        String parkingDescription = req.getParameter("content");
+        String parkingDescription = req.getParameter("content").trim();
         int rate = Integer.parseInt(req.getParameter("rate"));
         Entity parkingSpot = new Entity("ParkingSpot", parkingSpotsKey);
         parkingSpot.setProperty("id", date.getTime());

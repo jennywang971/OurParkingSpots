@@ -96,7 +96,11 @@ function addMarker(coord, id, description, rate, duration){
 	markers.push(marker);
 	
 	google.maps.event.addListener(marker, 'click', function() {
-		$("#description-info").text(description);
+		$("#description-info").empty();
+		var lines = description.length != 0 ? description.split("\n") : ["No description"];
+		lines.forEach(function(text) {
+			$("#description-info").append(document.createTextNode(text)).append("<br />");
+		});
 		$("#rate-info").text("$" + rate + " CAD" + " per day");
 		$("#total-price-info").text("$" +  parseInt(rate) * parseInt(duration) + " CAD");
 		$("#parkingInfoModal").modal();
