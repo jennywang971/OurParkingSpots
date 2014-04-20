@@ -60,9 +60,6 @@ public class SearchResultServlet extends HttpServlet {
 			today.add(Calendar.DATE, 7);
 			endDate = validate(endDateString) ? FORMATTER.parse(startDateString) : FORMATTER.parse(FORMATTER.format(today.getTime()));
 
-			startDate = FORMATTER.parse(startDateString);
-			endDate = FORMATTER.parse(endDateString);
-
 			int dayDiff = Days.daysBetween(new DateTime(startDate), new DateTime(endDate)).getDays() + 1;
 
 			Query query = new Query("ParkingSpot", parkingSpotsKey)
