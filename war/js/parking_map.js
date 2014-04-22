@@ -79,7 +79,7 @@ function handleNoGeolocation(isSupported){
 
 }
 
-function addMarker(coord, id, description, rate, duration){
+function addMarker(coord, id, description, rate, duration, startDate, endDate){
 
 	var icon = 'https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png';
 
@@ -102,7 +102,21 @@ function addMarker(coord, id, description, rate, duration){
 			$("#description-info").append(document.createTextNode(text)).append("<br />");
 		});
 		$("#rate-info").text("$" + rate + " CAD" + " per day");
-		$("#total-price-info").text("$" +  parseInt(rate) * parseInt(duration) + " CAD");
+		var total = parseInt(rate) * parseInt(duration);
+		$("#total-price-info").text("$" + total + " CAD");
+		
+		$("#reserve-btn").on( "click", function() {
+			var params = {
+					id: id,
+					rate: rate,
+					total: total,
+					startdatepicker: startDate,
+					enddatepicker: endDate
+			};
+			var path = "/reserve_parking_spot";
+			post_to_url(path, params);
+		});
+		
 		$("#parkingInfoModal").modal();
 	});
 }
@@ -112,5 +126,26 @@ function setAllMap(map) {
 		markers[i].setMap(map);
 	}
 } 
+
+function post_to_url(path, params) {
+	
+    var form = document.createElement("form");
+    form.setAttribute("method", "post");
+    form.setAttribute("action", path);
+
+    for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+         }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+}
 
 google.maps.event.addDomListener(window,'load', initialize);

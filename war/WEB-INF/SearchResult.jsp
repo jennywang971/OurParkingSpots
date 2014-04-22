@@ -59,7 +59,9 @@
                             		"${parkingSpot.properties.id}",
                             		"${parkingSpot.properties.description}",
                             		"${parkingSpot.properties.rate}",
-                            		"${duration}"); 
+                            		"${duration}",
+                            		"${param.startdatepicker}",
+                            		"${param.enddatepicker}"); 
                        </script>
                        <b><c:out value="${parkingSpot.properties.owner}"/></b> posted a parking spot...
 					   <blockquote>
@@ -102,8 +104,8 @@
 	        <div><label>Total Price</label><span id="total-price-info"></span></div>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">View detail</button>
-	        <button type="button" class="btn btn-success">Book this spot</button>
+	        <button id="detail-btn" type="button" class="btn btn-default">View detail</button>
+	        <button id="reserve-btn" type="button" class="btn btn-success">Book this spot</button>
 	      </div>
 	    </div>
 	  </div>

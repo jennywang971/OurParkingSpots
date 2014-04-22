@@ -52,7 +52,7 @@ public class ReserveParkingSpotServlet extends HttpServlet {
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         datastore.put(reservation);
 
-        resp.sendRedirect("WEB-INF/MyAccount.jsp"); // change to other page?
+        resp.sendRedirect("/my_account"); // change to other page?
 	}
 
 	
