@@ -46,11 +46,6 @@ public class DeleteParkingSpotServlet extends HttpServlet {
 				datastore.delete(e.getKey());
 			} 
 		  	
-		  	res.setContentType("text/html");
-	        res.setCharacterEncoding("UTF-8");
-	            
-	        res.getWriter().println("/my_account");      
-
 		} catch (Exception e) {
 			System.out.println("Delete parking error: " + e.getLocalizedMessage());
 		}
