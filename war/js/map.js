@@ -3,6 +3,7 @@
 google.maps.visualRefresh = true;
 var map;
 var markers = [];
+var reservations = [];
 var geocoder;
 var xmlHttpReq = null;
 
@@ -21,7 +22,7 @@ function initialize() {
 	
 	map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
-	setAllMap(map);
+	setAllMap(markers, map);
 	
 	if(navigator.geolocation){
 		navigator.geolocation.getCurrentPosition(showPosition, handleNoGeolocation(true));
@@ -29,10 +30,31 @@ function initialize() {
 		handleNoGeolocation(false);
 	}
 	
+	$("#my_reservation").css("display", "none");
+//	$("#my_reservation").css("visibility", "none");
+	
 	$(".glyphicon-trash").click(function() {
 		alert($(this).prev().val());
 		
 		postAjaxRequest($(this).prev().val());
+	});
+	
+	$(".btn-group.btn-group-justified > .btn-group > .btn-default").click(function() {
+		
+		if ($(this).text() == 'My Reservation' && !$("#my_reservation").is(":visible")) {
+			$("#my_account").toggle("slide", {direction : "left"}, 500);
+			$("#my_reservation").toggle("slide", {direction : "right"}, 500);
+			
+			cleanMarkers(markers);
+			setAllMap(reservations, map);
+		} else if ($(this).text() == 'My Parking Spots' && !$("#my_account").is(":visible")) {
+			$("#my_account").toggle("slide", {direction : "left"}, 500);
+			$("#my_reservation").toggle("slide", {direction : "right"}, 500);
+
+			cleanMarkers(reservations);
+			setAllMap(markers, map);
+		}
+		
 	});
 }
 
@@ -106,6 +128,18 @@ function addMarker(coord, title){
 	markers.push(marker);
 }
 
+function addReservation(coord, title){
+
+	var marker = new google.maps.Marker({
+		map : map,
+		position: coord,
+		animation : google.maps.Animation.DROP,
+		title: title
+	});
+	
+	reservations.push(marker);
+}
+
 function addInfoWindow(){
 	// alert("adding infor window");
 //	var spotInfo = " Parking spot info ";
@@ -114,11 +148,17 @@ function addInfoWindow(){
 //        map: map
 //    }); 
 }
-function setAllMap(map) {
-	for (var i = 0; i < markers.length; i++) {
-		markers[i].setMap(map);
+function setAllMap(arr, map) {
+	for (var i = 0; i < arr.length; i++) {
+		arr[i].setMap(map);
 	}
 } 
+
+function cleanMarkers(arr) {
+	for (var i = 0; i < arr.length; i++ ){
+		arr[i].setMap(null);
+	}
+}
 
 google.maps.event.addDomListener(window,'load', initialize);
 
