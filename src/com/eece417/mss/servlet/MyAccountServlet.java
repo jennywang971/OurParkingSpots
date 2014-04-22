@@ -1,6 +1,10 @@
 package com.eece417.mss.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -28,20 +32,45 @@ public class MyAccountServlet extends HttpServlet {
 
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		
+
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
 
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Key parkingSpotsKey = KeyFactory.createKey("ParkingSpots", "allParkingSpots");
 		Query query = new Query("ParkingSpot", parkingSpotsKey)
-			.addSort("startDate", Query.SortDirection.DESCENDING)
-			.addSort("endDate", Query.SortDirection.ASCENDING);
+		.addSort("startDate", Query.SortDirection.DESCENDING)
+		.addSort("endDate", Query.SortDirection.ASCENDING);
 
-		Filter startDateFilter = new FilterPredicate("owner", FilterOperator.EQUAL, user);
-		query.setFilter(startDateFilter);
+		Filter ownerFilter = new FilterPredicate("owner", FilterOperator.EQUAL, user);
+		query.setFilter(ownerFilter);
 
-		List<Entity> parkingSpots = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(10));
+		List<Entity> parkingSpots = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(30));
+
+  		Key reservationKey  = KeyFactory.createKey("ReservedSpots", "allReservedSpots");
+		Query reserveQuery = new Query("Reservation", reservationKey)
+		.addSort("startDate", Query.SortDirection.DESCENDING)
+		.addSort("endDate", Query.SortDirection.ASCENDING);
+
+/*		Filter renterFilter = new FilterPredicate("renter", FilterOperator.EQUAL, user);
+		reserveQuery.setFilter(renterFilter); */
+
+		List<Entity> reservedSpots = datastore.prepare(reserveQuery).asList(FetchOptions.Builder.withLimit(30));
+		List<Entity> history = new ArrayList<Entity>();
+
+		System.out.println("---->" + reservedSpots.size());
+		for (Iterator<Entity> iter = reservedSpots.listIterator(); iter.hasNext(); ) {
+			Entity e = iter.next();
+			Date startDate = (Date) e.getProperty("startDate");
+			System.out.println(e.getProperty("latitude"));
+	/*		if (!startDate.after(Calendar.getInstance().getTime())) {
+				history.add(e);
+				iter.remove();
+			} */
+		}
+
+		req.setAttribute("parkingHistory,", history);
+		req.setAttribute("reservedSpots", reservedSpots);
 		req.setAttribute("parkingSpots", parkingSpots);
 		req.getRequestDispatcher("/WEB-INF/MyAccount.jsp").forward(req, res);
 	}

@@ -3,6 +3,7 @@
 google.maps.visualRefresh = true;
 var map;
 var markers = [];
+var reservations = [];
 var geocoder;
 var xmlHttpReq = null;
 
@@ -21,8 +22,8 @@ function initialize() {
 
 	map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
-	setAllMap(map);
-
+	setAllMap(markers, map);
+	
 	if(navigator.geolocation){
 		navigator.geolocation.getCurrentPosition(showPosition, handleNoGeolocation(true));
 	} else {
@@ -31,10 +32,30 @@ function initialize() {
 
 	$(".glyphicon-trash").each(function(index) {
 		$(this).on("click", function() {
-			alert(index);
 			postAjaxRequest($(this).prev().val(), $(this).parent(), index);
 		});
 	}); 
+	
+	$("#my_reservation").css("display", "none");
+
+	
+	$(".btn-group.btn-group-justified > .btn-group > .btn-default").click(function() {
+		
+		if ($(this).text() == 'My Reservation' && !$("#my_reservation").is(":visible")) {
+			$("#my_account").toggle("slide", {direction : "left"}, 500);
+			$("#my_reservation").toggle("slide", {direction : "right"}, 500);
+			
+			cleanMarkers(markers);
+			setAllMap(reservations, map);
+		} else if ($(this).text() == 'My Parking Spots' && !$("#my_account").is(":visible")) {
+			$("#my_account").toggle("slide", {direction : "left"}, 500);
+			$("#my_reservation").toggle("slide", {direction : "right"}, 500);
+
+			cleanMarkers(reservations);
+			setAllMap(markers, map);
+		}
+		
+	});
 }
 
 //get map to display around the specified address
@@ -110,11 +131,30 @@ function addMarker(coord, title){
 	markers.push(marker);
 }
 
-function setAllMap(map) {
-	for (var i = 0; i < markers.length; i++) {
-		markers[i].setMap(map);
+function addReservation(coord, title){
+
+	var marker = new google.maps.Marker({
+		map : map,
+		position: coord,
+		animation : google.maps.Animation.DROP,
+		title: title
+	});
+	
+	reservations.push(marker);
+}
+
+
+function setAllMap(arr, map) {
+	for (var i = 0; i < arr.length; i++) {
+		arr[i].setMap(map);
 	}
 } 
+
+function cleanMarkers(arr) {
+	for (var i = 0; i < arr.length; i++ ){
+		arr[i].setMap(null);
+	}
+}
 
 google.maps.event.addDomListener(window,'load', initialize);
 

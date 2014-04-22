@@ -32,15 +32,21 @@ public class ReserveParkingSpotServlet extends HttpServlet {
         // for reserving
         Key reservationKey  = KeyFactory.createKey("ReservedSpots", "allReservedSpots");
         
+        long parkingSpotId = Long.parseLong(req.getParameter("id"));
         int rate = Integer.parseInt(req.getParameter("rate"));
         int total = Integer.parseInt(req.getParameter("total"));
-        Entity reservation = new Entity("Reservation",reservationKey );
+        Entity reservation = new Entity("Reservation", reservationKey);
         Date date = new Date();
-        reservation.setProperty("id", date.getTime());
+        reservation.setProperty("reservationId", date.getTime());
         reservation.setProperty("renter", user);
         reservation.setProperty("date", date);
         reservation.setProperty("rate", rate);
         reservation.setProperty("total", total);
+        reservation.setProperty("parkingSpotId", parkingSpotId);
+        reservation.setProperty("description", req.getParameter("description"));
+        reservation.setProperty("latitude", req.getParameter("latitude"));
+        reservation.setProperty("longitude", req.getParameter("longitude"));
+
       
         String startDateString = req.getParameter("startdatepicker");
         String endDateString = req.getParameter("enddatepicker");

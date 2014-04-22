@@ -40,7 +40,7 @@
             </div>
 	    </form>
 
-	   <div id="left_body" style="height:65%;">
+	   <div class="left_body" style="height:65%;">
 	   
 	       <c:choose>
                 <c:when test="${fn:length(parkingSpots) eq 0}">

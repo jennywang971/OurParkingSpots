@@ -111,7 +111,10 @@ function addMarker(coord, id, description, rate, duration, startDate, endDate){
 					rate: rate,
 					total: total,
 					startdatepicker: startDate,
-					enddatepicker: endDate
+					enddatepicker: endDate,
+					description: description,
+					latitude: coord.lat(),
+					longitude: coord.lng()
 			};
 			var path = "/reserve_parking_spot";
 			post_to_url(path, params);

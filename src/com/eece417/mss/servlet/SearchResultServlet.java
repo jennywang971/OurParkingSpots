@@ -5,8 +5,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,9 +31,6 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
-import com.google.appengine.api.users.User;
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
 
 public class SearchResultServlet extends HttpServlet {
 
@@ -47,6 +46,8 @@ public class SearchResultServlet extends HttpServlet {
 
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Key parkingSpotsKey = KeyFactory.createKey("ParkingSpots", "allParkingSpots");
+		
+		Key reservationKey  = KeyFactory.createKey("ReservedSpots", "allReservedSpots");
 
 		Calendar today = Calendar.getInstance();
 
@@ -58,7 +59,7 @@ public class SearchResultServlet extends HttpServlet {
 			startDate = validate(startDateString) ? FORMATTER.parse(startDateString) : FORMATTER.parse(FORMATTER.format(today.getTime()));
 
 			today.add(Calendar.DATE, 7);
-			endDate = validate(endDateString) ? FORMATTER.parse(startDateString) : FORMATTER.parse(FORMATTER.format(today.getTime()));
+			endDate = validate(endDateString) ? FORMATTER.parse(endDateString) : FORMATTER.parse(FORMATTER.format(today.getTime()));
 
 			int dayDiff = Days.daysBetween(new DateTime(startDate), new DateTime(endDate)).getDays() + 1;
 
@@ -70,14 +71,36 @@ public class SearchResultServlet extends HttpServlet {
 			query.setFilter(startDateFilter);
 
 			List<Entity> parkingSpots = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(10));
+			
+			// query reservation 
+			Query queryReservation = new Query("ReservedSpot", reservationKey);
+			List<Entity> reservedSpots = datastore.prepare(queryReservation).asList(FetchOptions.Builder.withLimit(100));
+			
+			Set<Long> reservedIdSet = new HashSet<>();
+			
+			// get a set of parking spot ids that are conflicting with the desired start or end date
+			for (Entity e : reservedSpots) {
+				Date start = (Date) e.getProperty("startDate");
+				Date end = (Date) e.getProperty("endDate");
+				Long spotId = (Long) e.getProperty("parkingSpotId");
+				if ((!end.before(startDate) && !end.after(endDate)) ||
+						(!start.before(startDate) && !start.after(endDate))) {
+					reservedIdSet.add(spotId);
+				}
+			}
 
 			for (Iterator<Entity> iter = parkingSpots.listIterator(); iter.hasNext(); ) {
 				Entity e = iter.next();
 				Date end = (Date) e.getProperty("endDate");
+				Long id = (Long) e.getProperty("id");
 
-				if (end != null && endDate.after(end))
-					// remove search results where the end date is after the search query specified
+				// remove search results where the end date is after the search query specified
+				// or the ids that have conflicting reservations
+				if ((end != null && endDate.after(end)) || reservedIdSet.contains(id)){
+					
 					iter.remove();
+				}
+				
 				else {
 					String description = e.getProperty("description").toString();
 					String escapeDescription = description
