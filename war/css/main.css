@@ -23,7 +23,7 @@ div#guestbook_header {
 	height: 20%;
 }
 
-div#left_body {
+div.left_body {
 	bottom: 0;
 	height: 80%;
 	overflow: auto;
