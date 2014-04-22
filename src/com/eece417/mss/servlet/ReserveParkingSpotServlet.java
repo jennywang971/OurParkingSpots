@@ -33,12 +33,14 @@ public class ReserveParkingSpotServlet extends HttpServlet {
         Key reservationKey  = KeyFactory.createKey("ReservedSpots", "allReservedSpots");
         
         int rate = Integer.parseInt(req.getParameter("rate"));
+        int total = Integer.parseInt(req.getParameter("total"));
         Entity reservation = new Entity("Reservation",reservationKey );
         Date date = new Date();
         reservation.setProperty("id", date.getTime());
         reservation.setProperty("renter", user);
         reservation.setProperty("date", date);
         reservation.setProperty("rate", rate);
+        reservation.setProperty("total", total);
       
         String startDateString = req.getParameter("startdatepicker");
         String endDateString = req.getParameter("enddatepicker");
@@ -50,7 +52,7 @@ public class ReserveParkingSpotServlet extends HttpServlet {
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         datastore.put(reservation);
 
-        resp.sendRedirect("/index.jsp"); // change to other page?
+        resp.sendRedirect("WEB-INF/MyAccount.jsp"); // change to other page?
 	}
 
 	
