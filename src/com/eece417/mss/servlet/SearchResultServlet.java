@@ -59,7 +59,7 @@ public class SearchResultServlet extends HttpServlet {
 			startDate = validate(startDateString) ? FORMATTER.parse(startDateString) : FORMATTER.parse(FORMATTER.format(today.getTime()));
 
 			today.add(Calendar.DATE, 7);
-			endDate = validate(endDateString) ? FORMATTER.parse(startDateString) : FORMATTER.parse(FORMATTER.format(today.getTime()));
+			endDate = validate(endDateString) ? FORMATTER.parse(endDateString) : FORMATTER.parse(FORMATTER.format(today.getTime()));
 
 			int dayDiff = Days.daysBetween(new DateTime(startDate), new DateTime(endDate)).getDays() + 1;
 
