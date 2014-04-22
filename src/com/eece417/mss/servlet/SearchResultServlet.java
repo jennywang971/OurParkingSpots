@@ -74,7 +74,7 @@ public class SearchResultServlet extends HttpServlet {
 			
 			// query reservation 
 			Query queryReservation = new Query("ReservedSpot", reservationKey);
-			List<Entity> reservedSpots = datastore.prepare(queryReservation).asList(null);
+			List<Entity> reservedSpots = datastore.prepare(queryReservation).asList(FetchOptions.Builder.withLimit(100));
 			
 			Set<Long> reservedIdSet = new HashSet<>();
 			
