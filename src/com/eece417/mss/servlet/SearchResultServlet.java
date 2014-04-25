@@ -81,13 +81,15 @@ public class SearchResultServlet extends HttpServlet {
 					FilterOperator.LESS_THAN_OR_EQUAL, startDate);
 			query.setFilter(startDateFilter);
 
+
 			List<Entity> parkingSpots = datastore.prepare(query).asList(
 					FetchOptions.Builder.withLimit(10));
 
-			// query reservation
-			Query queryReservation = new Query("ReservedSpot", reservationKey);
-			List<Entity> reservedSpots = datastore.prepare(queryReservation)
-					.asList(FetchOptions.Builder.withLimit(100));
+			
+			// query reservation 
+			Query queryReservation = new Query("Reservation", reservationKey);
+			List<Entity> reservedSpots = datastore.prepare(queryReservation).asList(FetchOptions.Builder.withLimit(100));
+			
 
 			Set<Long> reservedIdSet = new HashSet<>();
 

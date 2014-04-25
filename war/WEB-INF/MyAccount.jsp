@@ -18,7 +18,7 @@
                 	<p>You have not posted any parking spots.</p>
                 </c:when>
                 <c:otherwise>
-                    <p>Parking spots for <c:out value="${gaeUser}"/>...</p>
+                    <p>Parking spots for <c:out value="${user}"/>...</p>
                 </c:otherwise>
             </c:choose>
                 
@@ -48,13 +48,13 @@
             </c:if>
         </div>
         
-        <div id="my_reservation" class="left_body">
+        <div id="my_reservation" class="right_body">
             <c:choose>
                 <c:when test="${fn:length(reservedSpots) eq 0}">
                     <p>You have not reserved any parking spots.</p>
                 </c:when>
                 <c:otherwise>
-                    <p>Parking spots for <c:out value="${gaeUser}"/>...</p>
+                    <p>Reserved parking spots for <c:out value="${user}"/>...</p>
                 </c:otherwise>
             </c:choose>
                 
@@ -82,6 +82,43 @@
                     </c:if>
                 </c:forEach>
             </c:if>
+            
+            <p></p>
+            
+            <c:choose>
+                <c:when test="${fn:length(parkingHistory) eq 0}">
+                    <p>Your parking history is empty.</p>
+                </c:when>
+                <c:otherwise>
+                    <p>Expired parking for <c:out value="${user}"/>...</p>
+                </c:otherwise>
+            </c:choose>
+                
+            <c:if test="${! empty parkingHistory}">
+                <c:forEach items="${parkingHistory}" var="parkingSpot">
+                    <c:if test="${!empty parkingSpot.key}">
+                        <script> 
+                            addReservation(new google.maps.LatLng("${parkingSpot.properties.latitude}", "${parkingSpot.properties.longitude}"), "${user}"); 
+                        </script>
+                        <div class="input-group">
+                            <blockquote>
+                                <p><c:out value="${parkingSpot.properties.description}"/></p>
+                                <footer>
+                                    <fmt:formatDate pattern="MM/dd" value="${parkingSpot.properties.startDate}" /> ~
+                                    <fmt:formatDate pattern="MM/dd" value="${parkingSpot.properties.endDate}" />
+                                </footer>
+                                <footer>
+                                    [<c:out value="${parkingSpot.properties.latitude}"/>, <c:out value="${parkingSpot.properties.longitude}"/>]
+                                </footer>
+                            </blockquote>
+                            <input type="hidden" value="${parkingSpot.properties.id}" />
+                            <span class="input-group-addon trash glyphicon glyphicon-trash">
+                            </span>             
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </c:if>
+             
         </div>
     </div>
     <div id="map-canvas"> </div>

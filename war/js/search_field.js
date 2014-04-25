@@ -17,10 +17,10 @@ function loadCalendars() {
 	    autoclose: true
 
 	}).on('changeDate', function (ev) {
-	    if (ev.date.valueOf() > checkout.datepicker("getDate").valueOf() || !checkout.datepicker("getDate").valueOf()) {
+	    if (ev.date.valueOf() >= checkout.datepicker("getDate").valueOf() || !checkout.datepicker("getDate").valueOf()) {
 
 	        var newDate = new Date(ev.date);
-	        newDate.setDate(newDate.getDate() + 1);
+	        newDate.setDate(newDate.getDate());
 	        checkout.datepicker("update", newDate);
 
 	    }
@@ -32,7 +32,7 @@ function loadCalendars() {
 	        if (!checkin.datepicker("getDate").valueOf()) {
 	            return date.valueOf() >= new Date().valueOf();
 	        } else {
-	            return date.valueOf() > checkin.datepicker("getDate").valueOf();
+	            return date.valueOf() >= checkin.datepicker("getDate").valueOf();
 	        }
 	    },
 	    autoclose: true
