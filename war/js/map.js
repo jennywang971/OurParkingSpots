@@ -30,9 +30,15 @@ function initialize() {
 		handleNoGeolocation(false);
 	}
 
-	$(".glyphicon-trash").each(function(index) {
+	$("#my_account .glyphicon-trash").each(function(index) {
 		$(this).on("click", function() {
-			postAjaxRequest($(this).prev().val(), $(this).parent(), index);
+			postAjaxDeleteSpot($(this).prev().val(), $(this).parent(), index);
+		});
+	}); 
+	
+	$("#my_reservation .glyphicon-trash").each(function(index) {
+		$(this).on("click", function() {
+			postAjaxDeleteSpot($(this).prev().val(), $(this).parent(), index);
 		});
 	}); 
 	
@@ -159,9 +165,7 @@ function cleanMarkers(arr) {
 	}
 }
 
-google.maps.event.addDomListener(window,'load', initialize);
-
-function postAjaxRequest(id, container, index) {
+function postAjaxDeleteSpot(id, container, index) {
 
 	$.post( "/delete_parking",
 			{id: id},
@@ -171,3 +175,14 @@ function postAjaxRequest(id, container, index) {
 			});
 }
 
+function postAjaxDeleteReservation(id, container, index) {
+
+	$.post( "/delete_reservation",
+			{id: id},
+			function() {
+				container.remove();
+				markers[index].setMap(null);
+			});
+}
+
+google.maps.event.addDomListener(window,'load', initialize);

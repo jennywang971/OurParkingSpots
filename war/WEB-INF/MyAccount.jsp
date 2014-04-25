@@ -68,8 +68,8 @@
                             <blockquote>
                                 <p><c:out value="${parkingSpot.properties.description}"/></p>
                                 <footer>
-                                    <fmt:formatDate pattern="MM/dd" value="${parkingSpot.properties.startDate}" /> ~
-                                    <fmt:formatDate pattern="MM/dd" value="${parkingSpot.properties.endDate}" />
+                                    <fmt:formatDate pattern="MM/dd/yyyy" value="${parkingSpot.properties.startDate}" /> ~
+                                    <fmt:formatDate pattern="MM/dd/yyyy" value="${parkingSpot.properties.endDate}" />
                                 </footer>
                                 <footer>
                                     [<c:out value="${parkingSpot.properties.latitude}"/>, <c:out value="${parkingSpot.properties.longitude}"/>]
