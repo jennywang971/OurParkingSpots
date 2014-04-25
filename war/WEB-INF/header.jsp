@@ -36,8 +36,6 @@
     pageContext.setAttribute("logoutURL", userService.createLogoutURL("/"));
 %>
 
-<c:set var='gaeUser' scope='application' value="${user}"/>
-
 <!DOCTYPE html>
 <html>
     <head>

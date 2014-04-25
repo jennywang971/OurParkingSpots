@@ -52,21 +52,20 @@ public class MyAccountServlet extends HttpServlet {
 		.addSort("startDate", Query.SortDirection.DESCENDING)
 		.addSort("endDate", Query.SortDirection.ASCENDING);
 
-/*		Filter renterFilter = new FilterPredicate("renter", FilterOperator.EQUAL, user);
-		reserveQuery.setFilter(renterFilter); */
+  		Filter renterFilter = new FilterPredicate("renter", FilterOperator.EQUAL, user);
+		reserveQuery.setFilter(renterFilter); 
 
 		List<Entity> reservedSpots = datastore.prepare(reserveQuery).asList(FetchOptions.Builder.withLimit(30));
 		List<Entity> history = new ArrayList<Entity>();
 
-		System.out.println("---->" + reservedSpots.size());
 		for (Iterator<Entity> iter = reservedSpots.listIterator(); iter.hasNext(); ) {
 			Entity e = iter.next();
 			Date startDate = (Date) e.getProperty("startDate");
-			System.out.println(e.getProperty("latitude"));
-	/*		if (!startDate.after(Calendar.getInstance().getTime())) {
+			Date endDate = (Date) e.getProperty("endDate");
+	  	  	if (endDate.before(Calendar.getInstance().getTime())) {
 				history.add(e);
 				iter.remove();
-			} */
+			}  
 		}
 
 		req.setAttribute("parkingHistory,", history);
