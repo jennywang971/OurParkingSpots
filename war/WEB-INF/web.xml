@@ -49,6 +49,15 @@
         <servlet-name>DeleteParking</servlet-name>
         <url-pattern>/delete_parking</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>DeleteReservation</servlet-name>
+        <servlet-class>com.eece417.mss.servlet.DeleteReservation</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteReservation</servlet-name>
+        <url-pattern>/delete_reservation</url-pattern>
+    </servlet-mapping>
 
 	<servlet>
 		<servlet-name>MyAccount</servlet-name>
