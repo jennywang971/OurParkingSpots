@@ -181,7 +181,7 @@ function postAjaxDeleteReservation(id, container, index) {
 			{id: id},
 			function() {
 				container.remove();
-				markers[index].setMap(null);
+				reservations[index].setMap(null);
 			});
 }
 
