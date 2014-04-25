@@ -75,7 +75,7 @@
                                     [<c:out value="${parkingSpot.properties.latitude}"/>, <c:out value="${parkingSpot.properties.longitude}"/>]
                                 </footer>
                             </blockquote>
-                            <input type="hidden" value="${parkingSpot.properties.id}" />
+                            <input type="hidden" value="${parkingSpot.properties.reservationId}" />
                             <span class="input-group-addon trash glyphicon glyphicon-trash">
                             </span>             
                         </div>
@@ -111,9 +111,6 @@
                                     [<c:out value="${parkingSpot.properties.latitude}"/>, <c:out value="${parkingSpot.properties.longitude}"/>]
                                 </footer>
                             </blockquote>
-                            <input type="hidden" value="${parkingSpot.properties.id}" />
-                            <span class="input-group-addon trash glyphicon glyphicon-trash">
-                            </span>             
                         </div>
                     </c:if>
                 </c:forEach>
