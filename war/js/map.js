@@ -38,7 +38,7 @@ function initialize() {
 	
 	$("#my_reservation .glyphicon-trash").each(function(index) {
 		$(this).on("click", function() {
-			postAjaxDeleteSpot($(this).prev().val(), $(this).parent(), index);
+			postAjaxDeleteReservation($(this).prev().val(), $(this).parent(), index);
 		});
 	}); 
 	
