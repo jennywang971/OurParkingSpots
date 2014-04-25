@@ -36,7 +36,7 @@ public class DeleteReservation extends HttpServlet{
 		try {
 			Query query = new Query("Reservation", reservationKey);
 
-			Filter filter = new FilterPredicate("id", FilterOperator.EQUAL, Long.parseLong(req.getParameter("reservationId")));
+			Filter filter = new FilterPredicate("reservationId", FilterOperator.EQUAL, Long.parseLong(req.getParameter("id")));
 			query.setFilter(filter);
 
 			List<Entity> parkingSpots = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(1));
